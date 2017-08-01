@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# for phpstorm
+.idea
+
+# package
+package-lock.json

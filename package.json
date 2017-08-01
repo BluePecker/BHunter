@@ -1,0 +1,41 @@
+{
+    "name": "b-hunter",
+    "version": "1.0.0",
+    "description": "system publishing system",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BluePecker/BHunter.git"
+    },
+    "keywords": [
+        "task",
+        "hunter"
+    ],
+    "author": "shuc324@gmail.com",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/BluePecker/BHunter/issues"
+    },
+    "homepage": "https://github.com/BluePecker/BHunter#readme",
+    "dependencies": {
+        "bluebird": "^3.5.0",
+        "koa": "^2.3.0",
+        "mongoose": "^4.11.5",
+        "mysql2": "^1.3.6",
+        "sequelize": "^4.4.2"
+    },
+    "devDependencies": {
+        "eslint": "^4.3.0",
+        "eslint-config-standard": "^10.2.1",
+        "eslint-plugin-import": "^2.7.0",
+        "eslint-plugin-node": "^5.1.1",
+        "eslint-plugin-promise": "^3.5.0",
+        "eslint-plugin-standard": "^3.0.1",
+        "mocha": "^3.5.0",
+        "should": "^11.2.1",
+        "supertest": "^3.0.0"
+    }
+}
