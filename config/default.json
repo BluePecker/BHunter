@@ -1,5 +1,25 @@
 {
-  "Server": {
-    "port": 3000
-  }
+    "Server": {
+        "port": 3000
+    },
+    "Database": {
+        "mysql": {
+            "host": "",
+            "port": "",
+            "username": "",
+            "password": "",
+            "database": ""
+        },
+        "mongodb": {
+            "host": "",
+            "port": "",
+            "username": "",
+            "password": "",
+            "database": ""
+        },
+        "redis": {
+            "host": "",
+            "port": ""
+        }
+    }
 }
