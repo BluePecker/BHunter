@@ -2,8 +2,8 @@
  * Created by shuc on 17/8/1.
  */
 import Koa from 'koa';
-import Logger from 'koa-logger';
 import Config from 'config';
+import Logger from 'koa-logger';
 
 const app = new Koa();
 
