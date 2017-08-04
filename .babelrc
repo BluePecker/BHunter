@@ -10,6 +10,7 @@
     "transform-runtime",
     "syntax-async-functions",
     "transform-regenerator",
+    "transform-async-to-generator",
     "babel-plugin-transform-es2015-destructuring"
   ]
 }
