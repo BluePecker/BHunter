@@ -1,16 +1,6 @@
 /**
  * Created by shuc on 17/8/1.
  */
-import Koa from 'koa';
-import Config from 'config';
-import Logger from 'koa-logger';
+import Bootstrap from './bootstrap';
 
-const app = new Koa();
-
-app.use(Logger());
-
-app.use(ctx => {
-    ctx.body = 'Hello Koa';
-});
-
-app.listen(Config.get('Server.port'));
+Bootstrap.start();
