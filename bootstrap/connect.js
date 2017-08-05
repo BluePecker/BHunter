@@ -3,14 +3,14 @@
  */
 
 class Connect {
-    // connect mysql
+    // todo connect mysql
     Mysql(opt) {
     }
-    // connect redis
+    // todo connect redis
     Redis(opt) {
     }
 
-    // connect mongodb
+    // todo connect mongodb
     Mongodb(opt) {
     }
 }

@@ -1,6 +1,10 @@
 env:
     mocha: true
-extends: standard
+extends:
+  - eslint-config-airbnb
+  - eslint:recommended
+  - plugin:import/errors
+  - plugin:import/warnings
 plugins:
     - standard
     - promise

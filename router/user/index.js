@@ -1,7 +1,7 @@
 /**
  * Created by shuc on 17/8/1.
  */
+class User {
+}
 
-import Router from './../index';
-
-Router.get();
+export default User;
