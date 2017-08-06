@@ -65,20 +65,21 @@ class Bootstrap {
 
     /**
      * connector database
-     * @param opt
+     * @param opts
      */
-    connector(opt) {
+    connector(opts) {
         // connect db by opt
-        Object.keys(opt).forEach((conn) => {
+        Object.keys(opts).forEach((driver) => {
             // the first letter
-            conn = conn.toLowerCase();
-            const name = conn.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+            driver = driver.toLowerCase();
+            const name = driver.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
             // check has connector
             if (!Reflect.has(Connect, name)) {
                 throw new Error(`connector ${name} not defined`);
             }
             // instantiate the connection
-            this.app.context[name] = Connect[name](opt);
+            const conn = Connect[name](opts);
+            conn && (this.app.context[name] = conn);
         });
     }
 

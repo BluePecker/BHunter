@@ -11,10 +11,17 @@
             "database": "monitor"
         },
         "mongodb": {
-            "host": "127.0.0.1",
-            "port": 27017,
+            "hosts": [
+                {
+                    "host": "127.0.0.1",
+                    "port": 27017
+                }
+            ],
             "username": "root",
             "password": "541R4evB",
+            "options": {
+                "authSource": "admin"
+            },
             "database": "admin"
         },
         "redis": {
