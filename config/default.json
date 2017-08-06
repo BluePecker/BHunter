@@ -6,16 +6,16 @@
         "mysql": {
             "host": "127.0.0.1",
             "port": 3306,
-            "username": "hunter",
-            "password": "123456",
+            "username": "admin",
+            "password": "O!g3L70B%F",
             "database": "hunter"
         },
         "mongodb": {
             "host": "127.0.0.1",
             "port": 27017,
-            "username": "hunter",
-            "password": "123456",
-            "database": "hunter"
+            "username": "root",
+            "password": "541R4evB",
+            "database": "admin"
         },
         "redis": {
             "host": "127.0.0.1",
