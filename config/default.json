@@ -21,5 +21,30 @@
             "host": "",
             "port": ""
         }
+    },
+    "Logger": {
+        "appenders": {
+            "default": {
+                "type": "console"
+            },
+            "koa": {
+                "type": "file",
+                "filename": "runtime/logs/koa.log"
+            }
+        },
+        "categories": {
+            "default": {
+                "appenders": [
+                    "default"
+                ],
+                "level": "info"
+            },
+            "koa": {
+                "appenders": [
+                    "koa"
+                ],
+                "level": "info"
+            }
+        }
     }
 }
