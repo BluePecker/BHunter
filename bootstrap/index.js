@@ -6,7 +6,7 @@ import Dir from 'node-dir';
 import Config from 'config';
 import Mount from 'koa-mount';
 import Log4js from 'log4js';
-import Connect from './connect';
+import Connect from './manager';
 import Router from '../router/router';
 
 /**
