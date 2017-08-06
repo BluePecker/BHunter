@@ -13,9 +13,7 @@ Route.get('/user', (ctx, next) => {
 const V1 = new Router();
 
 V1.get('/user', (ctx) => {
-    ctx.body = 'v1';
+    ctx.body = 'user';
 });
 
 export {Route, V1};
-
-// export default Route;
