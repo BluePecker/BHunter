@@ -6,7 +6,6 @@ import Dir from 'node-dir';
 import Config from 'config';
 import Mount from 'koa-mount';
 import Log4js from 'log4js';
-// import Logger from 'koa-logger';
 import Connect from './connect';
 import Router from '../router/router';
 
@@ -21,8 +20,6 @@ class Bootstrap {
     constructor() {
         // new app
         this.app = new Koa();
-        // // use log middleware
-        // this.app.use(Logger());
         // x-response-time
         this.app.use(async(ctx, next) => {
             const start = Date.now();

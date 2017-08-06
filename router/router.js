@@ -4,8 +4,8 @@
 import KoaRouter from 'koa-router';
 
 class Router extends KoaRouter {
-    constructor() {
-        super();
+    constructor(opt) {
+        super(opt);
     }
 }
 
