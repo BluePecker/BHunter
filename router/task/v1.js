@@ -3,10 +3,10 @@
  */
 import Router from '../router';
 
+import Task from '../../service/task';
+
 const V1 = new Router({prefix: '/task'});
 
-V1.get('/create', (ctx) => {
-    ctx.body = 'v1-task';
-});
+V1.get('/create', Task.insert);
 
 export default V1;

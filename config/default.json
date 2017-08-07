@@ -20,6 +20,10 @@
             "username": "root",
             "password": "541R4evB",
             "options": {
+                "autoReconnect": 3,
+                "authMechanism": "SCRAM-SHA-1",
+                "retries": 5,
+                "poolSize": 50,
                 "authSource": "admin"
             },
             "database": "hunter"
