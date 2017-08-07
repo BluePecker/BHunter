@@ -1,18 +1,17 @@
 {
     "name": "bh-server",
     "version": "1.0.0",
-    "description": "system publishing system",
+    "description": "bounty hunters",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "run": "npm i -no-optional && babel-node app.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/BluePecker/BHunter.git"
     },
     "keywords": [
-        "task",
-        "hunter"
+        "bounty hunters"
     ],
     "author": "shuc324@gmail.com",
     "license": "Apache-2.0",
