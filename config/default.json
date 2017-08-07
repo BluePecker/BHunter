@@ -8,7 +8,7 @@
             "port": 3306,
             "username": "root",
             "password": "T41vF!x2L4",
-            "database": "monitor"
+            "database": "hunter"
         },
         "mongo": {
             "hosts": [
@@ -22,7 +22,7 @@
             "options": {
                 "authSource": "admin"
             },
-            "database": "admin"
+            "database": "hunter"
         },
         "redis": {
             "host": "127.0.0.1",
