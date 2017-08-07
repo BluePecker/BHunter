@@ -10,7 +10,7 @@
             "password": "T41vF!x2L4",
             "database": "monitor"
         },
-        "mongodb": {
+        "mongo": {
             "hosts": [
                 {
                     "host": "127.0.0.1",
@@ -38,6 +38,12 @@
         },
         "categories": {
             "default": {
+                "appenders": [
+                    "koa"
+                ],
+                "level": "info"
+            },
+            "koa": {
                 "appenders": [
                     "koa"
                 ],

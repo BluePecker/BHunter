@@ -1,12 +1,11 @@
 /**
  * Created by shuc on 17/8/5.
  */
+import Config from 'config';
 import Koa from 'koa';
 import Dir from 'node-dir';
-import Config from 'config';
 import Mount from 'koa-mount';
 import Log4js from 'log4js';
-import Connect from './manager';
 import Router from '../router/router';
 
 /**
@@ -34,12 +33,7 @@ class Bootstrap {
      * logger
      */
     static logger() {
-        const Logger = Config.has('Logger') ? Config.get('Logger') : {};
-
-        Log4js.configure({
-            appenders: Logger.appenders || {},
-            categories: Logger.categories || {}
-        });
+        Log4js.configure(Config.get('Logger') || {});
     }
 
     /**
@@ -47,9 +41,9 @@ class Bootstrap {
      */
     start() {
         // get db config
-        const database = Config.get('Database');
+        // const database = Config.get('Database');
         // connect db by config defined
-        this.connector(database);
+        // this.connector(database);
         // load router
         this.router();
         // load logger
@@ -63,25 +57,25 @@ class Bootstrap {
         });
     }
 
-    /**
-     * connector database
-     * @param opts
-     */
-    connector(opts) {
-        // connect db by opt
-        Object.keys(opts).forEach((driver) => {
-            // the first letter
-            driver = driver.toLowerCase();
-            const name = driver.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
-            // check has connector
-            if (!Reflect.has(Connect, name)) {
-                throw new Error(`connector ${name} not defined`);
-            }
-            // instantiate the connection
-            const conn = Connect[name](opts);
-            conn && (this.app.context[name] = conn);
-        });
-    }
+    // /**
+    //  * connector database
+    //  * @param opts
+    //  */
+    // connector(opts) {
+    //     // connect db by opt
+    //     Object.keys(opts).forEach((driver) => {
+    //         // the first letter
+    //         driver = driver.toLowerCase();
+    //         const name = driver.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+    //         // check has connector
+    //         if (!Reflect.has(Connect, name)) {
+    //             throw new Error(`connector ${name} not defined`);
+    //         }
+    //         // instantiate the connection
+    //         const conn = Connect[name](opts);
+    //         conn && (this.app.context[name] = conn);
+    //     });
+    // }
 
     /**
      * load router
