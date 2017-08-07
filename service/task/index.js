@@ -3,9 +3,13 @@
  */
 
 class Task {
+    add = (ctx) => {
+        ctx.body = 'v1';
+    };
+
     insert = (ctx) => {
-        ctx.body = 'task create';
-    }
+        ctx.body = 'v2';
+    };
 }
 
 export default new Task();
