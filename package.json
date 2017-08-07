@@ -4,7 +4,8 @@
     "description": "bounty hunters",
     "main": "app.js",
     "scripts": {
-        "run": "npm i -no-optional && babel-node app.js"
+        "run": "npm i -no-optional && babel-node app.js",
+        "test": "echo 'Error: no test specified' && exit 1"
     },
     "repository": {
         "type": "git",
