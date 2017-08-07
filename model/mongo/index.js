@@ -10,7 +10,7 @@ const options = Config.get('Database.mongo') || {};
 const auth = Builder.format(options);
 const logger = Log4js.getLogger('koa');
 
-const mongoose = Mongoose.connect(auth).then(() => {
+Mongoose.connect(auth).then(() => {
     "use strict";
     logger.info(`MONGO: Successfully connected to ${auth}`);
 }, err => {
@@ -18,4 +18,4 @@ const mongoose = Mongoose.connect(auth).then(() => {
     logger.error(`MONGO: Unable to connected for err -> ${err}`);
 });
 
-export default mongoose;
+export default Mongoose;

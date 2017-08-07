@@ -2,9 +2,9 @@
  * Created by shuc on 17/8/1.
  */
 import bluebird from 'bluebird';
-import mongoose from 'mongoose';
+import mongoose from '../index';
 
-const TaskSchema = new mongoose.Schema({
+const Task = new mongoose.Schema({
     created: {
         type   : Date,
         default: Date.now
@@ -14,7 +14,7 @@ const TaskSchema = new mongoose.Schema({
 /**
  * statics
  */
-TaskSchema.statics = {
+Task.statics = {
     list(id) {
         return this.findById(id).exec().then((user) => {
             if (user) {
@@ -25,4 +25,4 @@ TaskSchema.statics = {
     }
 };
 
-export default mongoose.model('task', TaskSchema);
+export default mongoose.model('task', Task);

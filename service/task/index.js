@@ -1,9 +1,21 @@
 /**
  * Created by shuc on 17/8/6.
  */
+import User from '../../model/mysql/user';
+import Task from '../../model/mongo/task';
 
-class Task {
+class TaskService {
     add = (ctx) => {
+        User.sync({force: true}).then(() => {
+            // Table created
+            return User.create({
+                created: new Date(Date.UTC(2016, 0, 1)),
+                modified: new Date(Date.UTC(2016, 0, 1))
+            });
+        });
+
+        (new Task({})).save();
+
         ctx.body = 'v1';
     };
 
@@ -12,4 +24,4 @@ class Task {
     };
 }
 
-export default new Task();
+export default new TaskService();

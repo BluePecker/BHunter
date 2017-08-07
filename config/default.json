@@ -4,21 +4,20 @@
     },
     "Database": {
         "mysql": {
-            "host": "127.0.0.1",
+            "protocol": "mysql",
+            "host": "192.168.99.100",
             "port": 3306,
-            "username": "root",
-            "password": "T41vF!x2L4",
+            "username": "hunter",
+            "password": "O!g3L70B%F",
             "database": "hunter"
         },
         "mongo": {
             "hosts": [
                 {
-                    "host": "127.0.0.1",
+                    "host": "192.168.99.100",
                     "port": 27017
                 }
             ],
-            "username": "root",
-            "password": "541R4evB",
             "options": {
                 "autoReconnect": 3,
                 "authMechanism": "SCRAM-SHA-1",
@@ -26,11 +25,17 @@
                 "poolSize": 50,
                 "authSource": "admin"
             },
+            "username": "hunter",
+            "password": "541R4evB",
             "database": "hunter"
         },
         "redis": {
-            "host": "127.0.0.1",
-            "port": 6379
+            "host": "192.168.99.100",
+            "port": 6379,
+            "options": {
+                "connectTimeout": 10000,
+                "keepAlive": 10
+            }
         }
     },
     "Logger": {

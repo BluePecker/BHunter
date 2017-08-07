@@ -6,9 +6,8 @@ import Config from 'config';
 import Sequelize from 'sequelize';
 import Log4js from 'log4js';
 
-const options = Config.get('Database.mysql') || {};
-const auth = Builder.stringify(options);
-const sequelize = new Sequelize(auth);
+const auth = Builder.stringify(Config.get('Database.mysql') || {});
+const sequelize = new Sequelize(auth, {pool: {min: 0, max: 50}, logging: false});
 const logger = Log4js.getLogger('koa');
 
 sequelize.authenticate().then(() => {

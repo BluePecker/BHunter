@@ -40,14 +40,14 @@ class Bootstrap {
      * starting program
      */
     start() {
+        // load logger
+        Bootstrap.logger();
         // get db config
         // const database = Config.get('Database');
         // connect db by config defined
         // this.connector(database);
         // load router
         this.router();
-        // load logger
-        Bootstrap.logger();
         // get server port
         const port = Config.get('Server.port');
         // start to listen
