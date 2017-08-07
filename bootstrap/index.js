@@ -1,7 +1,7 @@
 /**
  * Created by shuc on 17/8/5.
  */
-import Dir from 'node-dir';
+import ReadDir from 'node-dir';
 import Log4js from 'log4js';
 import Koa from 'koa';
 import Config from 'config';
@@ -104,7 +104,7 @@ class Bootstrap {
         // get project root path
         const root = process.cwd();
         // traverse the router directory
-        Dir.subdirs(`${root}/router`, (err, dirs) => {
+        ReadDir.subdirs(`${root}/router`, (err, dirs) => {
             dirs.forEach(dir => {
                 const routes = require(dir);
                 dispatcher(routes);
