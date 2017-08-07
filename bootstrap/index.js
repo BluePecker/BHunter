@@ -1,11 +1,11 @@
 /**
  * Created by shuc on 17/8/5.
  */
-import Config from 'config';
-import Koa from 'koa';
 import Dir from 'node-dir';
-import Mount from 'koa-mount';
 import Log4js from 'log4js';
+import Koa from 'koa';
+import Config from 'config';
+import Mount from 'koa-mount';
 import Router from '../router/router';
 
 /**
