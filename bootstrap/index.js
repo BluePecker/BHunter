@@ -53,7 +53,7 @@ class Bootstrap {
         // start to listen
         this.app.listen(port, () => {
             const logger = Log4js.getLogger('koa');
-            logger.info(`listening ${port}`);
+            logger.info(`Server is listening ${port}`);
         });
     }
 
