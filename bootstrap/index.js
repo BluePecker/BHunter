@@ -17,14 +17,16 @@ class Bootstrap {
      * construct func
      */
     constructor() {
+        const logger = Log4js.getLogger('koa');
         // new app
         this.app = new Koa();
-        // x-response-time
+        // x-response-time and write request log
         this.app.use(async(ctx, next) => {
             const start = Date.now();
             await next();
             const ms = Date.now() - start;
             ctx.set('X-Response-Time', `${ms}ms`);
+            logger.info('%s %s %s - %sms', ctx.status, ctx.method, ctx.url, ms);
         });
     }
 
