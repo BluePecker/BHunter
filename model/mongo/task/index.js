@@ -4,6 +4,12 @@
 import bluebird from 'bluebird';
 import mongoose from '../index';
 
+/**
+ * The complete bluebird, or one or more components of the bluebird.
+ * @typedef {object} bluebird
+ * @property {function} reject - Indicates whether the Courage component is reject.
+ */
+
 const Task = new mongoose.Schema({
     created: {
         type   : Date,
