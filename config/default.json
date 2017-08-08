@@ -45,14 +45,14 @@
                 "alwaysIncludePattern": true,
                 "pattern": "-yyyy-MM-dd.log",
                 "type": "dateFile",
-                "filename": "runtime/logs/logic"
+                "filename": "runtime/logs/logic/logic"
             },
             "koa": {
                 "maxLogSize": 1024,
                 "alwaysIncludePattern": true,
                 "pattern": "-yyyy-MM-dd.log",
                 "type": "dateFile",
-                "filename": "runtime/logs/koa"
+                "filename": "runtime/logs/koa/koa"
             }
         },
         "categories": {
