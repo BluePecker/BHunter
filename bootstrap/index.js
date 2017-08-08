@@ -110,10 +110,7 @@ class Bootstrap {
                     }
                     name = name.toLowerCase();
                     // for default/route route
-                    if (name === 'default' || name == 'route') {
-                        this.app.use(route.routes());
-                        return false;
-                    }
+                    (name === 'default' || name == 'route') && (name = 'v1');
                     // for version
                     this.app.use(Mount(`/${name}`, route.middleware()));
                 });
