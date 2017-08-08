@@ -5,6 +5,7 @@ import ReadDir from 'node-dir';
 import Log4js from 'log4js';
 import Koa from 'koa';
 import Config from 'config';
+import Path from 'path-exists';
 import Mount from 'koa-mount';
 import Router from '../router/router';
 
@@ -17,16 +18,19 @@ class Bootstrap {
      * construct func
      */
     constructor() {
-        const logger = Log4js.getLogger('koa');
+        this.logger = Log4js.getLogger('koa');
+        // get project root path
+        this.root = process.cwd();
         // new app
         this.app = new Koa();
-        // x-response-time and write request log
         this.app.use(async(ctx, next) => {
             const start = Date.now();
             await next();
             const ms = Date.now() - start;
+            // write request log
+            this.logger.info('%s %s %s - %sms', ctx.status, ctx.method, ctx.url, ms);
+            // x-response-time
             ctx.set('X-Response-Time', `${ms}ms`);
-            logger.info('%s %s %s - %sms', ctx.status, ctx.method, ctx.url, ms);
         });
     }
 
@@ -44,43 +48,40 @@ class Bootstrap {
     start() {
         // load logger
         Bootstrap.logger();
-        // get db config
-        // const database = Config.get('Database');
-        // connect db by config defined
-        // this.connector(database);
+        // init db connection by config defined
+        this.initDatabase(Config.get('Database') || {});
         // load router
         this.router();
         // get server port
         const port = Config.get('Server.port');
         // start to listen
         this.app.listen(port, () => {
-            const logger = Log4js.getLogger('koa');
-            logger.info(`Server is listening ${port}`);
+            this.logger.info(`Server is listening ${port}`);
         });
     }
 
-    // /**
-    //  * connector database
-    //  * @param opts
-    //  */
-    // connector(opts) {
-    //     // connect db by opt
-    //     Object.keys(opts).forEach((driver) => {
-    //         // the first letter
-    //         driver = driver.toLowerCase();
-    //         const name = driver.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
-    //         // check has connector
-    //         if (!Reflect.has(Connect, name)) {
-    //             throw new Error(`connector ${name} not defined`);
-    //         }
-    //         // instantiate the connection
-    //         const conn = Connect[name](opts);
-    //         conn && (this.app.context[name] = conn);
-    //     });
-    // }
+    /**
+     * init database
+     * @param opts
+     */
+    initDatabase(opts) {
+        Object.keys(opts).forEach((driver) => {
+            const name = driver.toLowerCase();
+            /**
+             * @typedef {object} PathCheck
+             * @property {function} then
+             */
+            const PathCheck = Path(`${this.root}/model/${name}`);
+            PathCheck.then(() => {
+                require(`${this.root}/model/${name}`);
+            }).catch(err => {
+                this.logger.error(`db model not exist, error -> ${err}`);
+            });
+        });
+    }
 
     /**
-     * load router
+     * auto load router
      */
     router() {
         // check is router
@@ -103,10 +104,9 @@ class Bootstrap {
                 }
             });
         };
-        // get project root path
-        const root = process.cwd();
+
         // traverse the router directory
-        ReadDir.subdirs(`${root}/router`, (err, dirs) => {
+        ReadDir.subdirs(`${this.root}/router`, (err, dirs) => {
             dirs.forEach(dir => {
                 const routes = require(dir);
                 dispatcher(routes);
