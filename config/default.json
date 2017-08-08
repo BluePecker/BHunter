@@ -40,15 +40,25 @@
     },
     "Logger": {
         "appenders": {
+            "logic": {
+                "maxLogSize": 1024,
+                "alwaysIncludePattern": true,
+                "pattern": "-yyyy-MM-dd.log",
+                "type": "dateFile",
+                "filename": "runtime/logs/logic"
+            },
             "koa": {
-                "type": "file",
-                "filename": "runtime/logs/koa.log"
+                "maxLogSize": 1024,
+                "alwaysIncludePattern": true,
+                "pattern": "-yyyy-MM-dd.log",
+                "type": "dateFile",
+                "filename": "runtime/logs/koa"
             }
         },
         "categories": {
             "default": {
                 "appenders": [
-                    "koa"
+                    "logic"
                 ],
                 "level": "info"
             },
