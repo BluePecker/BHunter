@@ -1,7 +1,7 @@
 /**
  * Created by shuc on 17/8/6.
  */
-import Service from './index';
+import Service from '../index';
 import User from '../../model/mysql/user';
 import Task from '../../model/mongo/task';
 
@@ -17,7 +17,7 @@ class TaskService extends Service {
 
         (new Task({})).save();
 
-        ctx.body = 'v1';
+        this.ctx.body = Reflect.has(ctx, 'req');
     };
 
     insert = (ctx) => {
