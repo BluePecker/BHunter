@@ -36,7 +36,6 @@ class Bootstrap {
     }
 
     /**
-     * todo 完善日志功能
      * logger
      */
     static logger() {
