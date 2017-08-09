@@ -23,6 +23,10 @@ class Bootstrap {
         this.root = process.cwd();
         // new app
         this.app = new Koa();
+        // listen error
+        this.app.on('error', err => {
+            this.logger.error(`ooh! some wrong happened: ${err}`);
+        });
         // defined response header
         this.app.use(async(ctx, next) => {
             await next();
