@@ -13,7 +13,6 @@ class Service {
                     return Reflect.get(target, name);
                 }
                 return (...args) => {
-                    // todo 此处判断不严谨
                     if (Reflect.has(args[0], 'req') && Reflect.has(args[0], 'res')) {
                         Reflect.set(target, 'ctx', args[0]);
                     }
