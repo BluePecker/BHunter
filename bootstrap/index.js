@@ -23,6 +23,12 @@ class Bootstrap {
         this.root = process.cwd();
         // new app
         this.app = new Koa();
+        // defined response header
+        this.app.use(async(ctx, next) => {
+            await next();
+            ctx.set('charset', 'utf-8');
+            ctx.set('Content-Type', 'application/json');
+        });
         // recorder request log and cost time
         this.app.use(async(ctx, next) => {
             const start = Date.now();

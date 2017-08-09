@@ -16,8 +16,7 @@ class TaskService extends Service {
         });
 
         (new Task({})).save();
-
-        this.ctx.body = Reflect.has(ctx, 'req');
+        this.response(200, {}, 'add success');
     };
 
     insert = (ctx) => {
