@@ -26,7 +26,7 @@ class Bootstrap {
         // defined response header
         this.app.use(async(ctx, next) => {
             await next();
-            ctx.set('charset', 'utf-8');
+            ctx.set('Charset', 'utf-8');
             ctx.set('Content-Type', 'application/json');
         });
         // recorder request log and cost time

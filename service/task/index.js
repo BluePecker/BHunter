@@ -6,7 +6,7 @@ import User from '../../model/mysql/user';
 import Task from '../../model/mongo/task';
 
 class TaskService extends Service {
-    add = (ctx) => {
+    add = () => {
         User.sync({force: true}).then(() => {
             // Table created
             return User.create({
@@ -16,11 +16,7 @@ class TaskService extends Service {
         });
 
         (new Task({})).save();
-        this.response(200, {}, 'add success');
-    };
-
-    insert = (ctx) => {
-        ctx.body = 'v2';
+        this.response(Service.SUCCESS, 'add success');
     };
 }
 

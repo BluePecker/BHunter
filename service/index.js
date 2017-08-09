@@ -2,7 +2,8 @@
  * Created by shuc on 17/8/8.
  */
 class ResponseCode {
-
+    static SUCCESS = 200;
+    static FAILURE = 400;
 }
 
 class Service extends ResponseCode {
@@ -28,9 +29,37 @@ class Service extends ResponseCode {
     }
 
     response(code, data, message) {
+        if (typeof data == 'string') {
+            message = data;
+            data = null;
+        }
         this.ctx.body = {
             code: code,
-            data: data,
+            data: data || {},
+            message: message
+        };
+    }
+
+    success(data, message) {
+        if (typeof data == 'string') {
+            message = data;
+            data = null;
+        }
+        this.ctx.body = {
+            code: ResponseCode.SUCCESS,
+            data: data || {},
+            message: message
+        };
+    }
+
+    failure(data, message) {
+        if (typeof data == 'string') {
+            message = data;
+            data = null;
+        }
+        this.ctx.body = {
+            code: ResponseCode.FAILURE,
+            data: data || {},
             message: message
         };
     }
