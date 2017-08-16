@@ -59,10 +59,10 @@ const TaskSchema = new mongoose.Schema({
         type: Date
     },
     // 位置
-    // location: {
-    //     type       : {type: String},
-    //     coordinates: {type: [Number]}
-    // },
+    location: {
+        type       : {type: String},
+        coordinates: {type: [Number]}
+    },
     // 发布者
     creator : {
         _id: mongoose.Schema.Types.ObjectId
@@ -88,10 +88,10 @@ const TaskSchema = new mongoose.Schema({
 });
 
 // 添加索引
-// TaskSchema.index({
-//     // 位置索引
-//     location: "2dsphere"
-// });
+TaskSchema.index({
+    // 位置索引
+    location: "2dsphere"
+});
 
 /**
  * 新增或修改任务
@@ -141,14 +141,14 @@ Task.schema.path('contact').validate(val => {
 Task.schema.path('review.status').validate(val => {
     return ['r1', 'r2'].indexOf(val) >= 0;
 }, '审核状态有误');
-// Task.schema.path('creator._id').validate(val => {
-//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-// }, '发布者ID有误');
-// Task.schema.path('business._id').validate(val => {
-//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-// }, '行业ID有误');
-// Task.schema.path('merchant._id').validate(val => {
-//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-// }, '商户ID有误');
+Task.schema.path('creator._id').validate(val => {
+    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+}, '发布者ID有误');
+Task.schema.path('business._id').validate(val => {
+    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+}, '行业ID有误');
+Task.schema.path('merchant._id').validate(val => {
+    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+}, '商户ID有误');
 
 export default Task;
