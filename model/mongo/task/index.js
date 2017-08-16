@@ -24,7 +24,7 @@ const TaskSchema = new mongoose.Schema({
     // 策略
     tactics : {
         // 领赏方案(c1: 固定金额, c2: 提成比例*成单价)
-        type     : String,
+        case     : String,
         // 限额
         quota    : Number,
         // 可供支付金钱(元)
@@ -141,14 +141,14 @@ Task.schema.path('contact').validate(val => {
 Task.schema.path('review.status').validate(val => {
     return ['r1', 'r2'].indexOf(val) >= 0;
 }, '审核状态有误');
-Task.schema.path('creator._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '发布者ID有误');
-Task.schema.path('business._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '行业ID有误');
-Task.schema.path('merchant._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '商户ID有误');
+// Task.schema.path('creator._id').validate(val => {
+//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+// }, '发布者ID有误');
+// Task.schema.path('business._id').validate(val => {
+//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+// }, '行业ID有误');
+// Task.schema.path('merchant._id').validate(val => {
+//     return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
+// }, '商户ID有误');
 
 export default Task;
