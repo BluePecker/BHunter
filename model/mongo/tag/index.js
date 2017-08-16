@@ -25,6 +25,6 @@ const TagSchema = new mongoose.Schema({
     describe: String
 }, {versionKey: false, timestamps: {createdAt: 'created', updatedAt: 'modified'}});
 
-const Tag = mongoose.model('Tag', TagSchema);
+const Tag = mongoose.model('tag', TagSchema);
 
 export default Tag;
