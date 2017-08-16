@@ -10,7 +10,7 @@ class TaskService extends Service {
         return (new Task(ctx.request.body)).save().then(res => {
             this.response(Service.SUCCESS, res);
         }).catch(err => {
-            this.response(Service.FAILURE, err);
+            this.response(Service.FAILURE, err.message);
         });
         // User.sync({force: true}).then(() => {
         //     // Table created

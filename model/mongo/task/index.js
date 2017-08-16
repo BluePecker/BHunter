@@ -74,18 +74,8 @@ const TaskSchema = new mongoose.Schema({
     // 商户
     merchant: {
         _id: mongoose.Schema.Types.ObjectId
-    },
-    // 创建时间
-    created : {
-        type   : Date,
-        default: Date.now
-    },
-    // 修改时间
-    modified: {
-        type   : Date,
-        default: Date.now
     }
-});
+}, {versionKey: false, timestamps: {createdAt: 'created', updatedAt: 'modified'}});
 
 // 添加索引
 TaskSchema.index({
