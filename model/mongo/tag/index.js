@@ -14,7 +14,9 @@ const TagSchema = new mongoose.Schema({
     name    : String,
     // 审核
     review  : {
+        // 审核状态
         status   : Boolean,
+        // 审核时间
         timestamp: Date
     },
     // 删除时间
