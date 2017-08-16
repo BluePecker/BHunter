@@ -6,6 +6,7 @@ import Log4js from 'log4js';
 import Koa from 'koa';
 import Config from 'config';
 import Path from 'path-exists';
+import BodyParser from 'koa-bodyparser';
 import Mount from 'koa-mount';
 import Router from '../router/router';
 
@@ -27,6 +28,8 @@ class Bootstrap {
         this.app.on('error', err => {
             this.logger.error(`ooh! some wrong happened: ${err}`);
         });
+        // body parser
+        this.app.use(BodyParser());
         // defined response header
         this.app.use(async(ctx, next) => {
             await next();
