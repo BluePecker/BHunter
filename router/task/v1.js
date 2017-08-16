@@ -7,6 +7,6 @@ import Task from '../../service/task';
 
 const V1 = new Router({prefix: '/task'});
 
-V1.post('/create', Task.add);
+V1.post('/create', Task.create);
 
 export default V1;

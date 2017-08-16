@@ -19,7 +19,8 @@ const TaskSchema = new mongoose.Schema({
     review  : {
         // 状态 (r1: 发布待审, r2: 审核通过)
         status   : String,
-        timestamp: {type: Date}
+        // 审核时间
+        timestamp: Date
     },
     // 策略
     tactics : {
@@ -60,7 +61,9 @@ const TaskSchema = new mongoose.Schema({
     },
     // 位置
     location: {
-        type       : {type: String},
+        // 类型
+        type       : {type: String, default: 'Point'},
+        // 经纬度
         coordinates: {type: [Number]}
     },
     // 发布者
