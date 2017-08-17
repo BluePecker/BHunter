@@ -113,6 +113,7 @@ TaskSchema.statics = {
             return bluebird.reject(err);
         });
     },
+
     // 驳回
     reject(id, user) {
         return this.findByIdAndUpdate(id, {
