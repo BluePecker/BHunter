@@ -18,7 +18,7 @@ const BusinessSchema = new mongoose.Schema({
     // 删除时间
     deleted: Date,
     // 行业名
-    name   : String,
+    name   : {type: String, index: {unique: true}},
     // 创建者
     creator: {
         _id: mongoose.Schema.Types.ObjectId
@@ -34,7 +34,7 @@ const BusinessSchema = new mongoose.Schema({
 });
 
 // 添加内建方法
-BusinessSchema.buildin = {
+BusinessSchema.statics = {
     // 新建行业
     create: (business) => {
         return (new Business({
@@ -42,9 +42,9 @@ BusinessSchema.buildin = {
                 _id: business.creator || ''
             },
             name   : business.name || '',
-            parent : {
+            parent : business.parent ? {
                 _id: business.parent || ''
-            }
+            } : ''
         })).save().then(business => {
             return business;
         }).catch(err => {
