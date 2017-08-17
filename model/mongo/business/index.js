@@ -38,9 +38,9 @@ BusinessSchema.statics = {
     // 新建行业
     create: (business) => {
         return (new Business({
-            creator: business.creator || '',
+            parent : business.parent || '',
             name   : business.name || '',
-            parent : business.parent || ''
+            creator: business.creator || ''
         })).save().then(business => {
             return business;
         }).catch(err => {
