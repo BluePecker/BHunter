@@ -2,7 +2,7 @@
  * Created by shuc on 17/8/1.
  */
 import bluebird from 'bluebird';
-import mongoose from '../mongo';
+import mongoose from '../index';
 /**
  * The complete bluebird, or one or more components of the bluebird.
  * @typedef {object} bluebird
@@ -78,7 +78,10 @@ const TaskSchema = new mongoose.Schema({
     merchant: {
         _id: mongoose.Schema.Types.ObjectId
     }
-}, {versionKey: false, timestamps: {createdAt: 'created', updatedAt: 'modified'}});
+}, {
+    versionKey: false,
+    timestamps: {createdAt: 'created', updatedAt: 'modified'}
+});
 
 // 添加索引
 TaskSchema.index({
