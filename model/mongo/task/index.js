@@ -45,7 +45,7 @@ const TaskSchema = new mongoose.Schema({
         }
     },
     // 标签
-    tags    : [String],
+    labels  : [String],
     // 详情
     detail  : String,
     // 附件
@@ -92,12 +92,7 @@ TaskSchema.index({
 /**
  * 新增或修改任务
  */
-TaskSchema.write = {
-    // insert: (task) => {
-    //
-    // },
-
-
+TaskSchema.statics = {
     // 审核任务
     review: (id) => {
         return this.findByIdAndUpdate(id, {
@@ -117,16 +112,7 @@ TaskSchema.write = {
 
 const Task = mongoose.model('task', TaskSchema);
 
-Task.schema.path('describe').validate(val => {
-    return val.length;
-}, '描述为必填字段');
-Task.schema.path('headline').validate(val => {
-    return val.length;
-}, '标题为必填字段');
-Task.schema.path('detail').validate(val => {
-    return val.length;
-}, '详情为必填字段');
-Task.schema.path('tags').validate(val => {
+Task.schema.path('labels').validate(val => {
     return val.every(item => {
         return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(item);
     });
@@ -137,14 +123,5 @@ Task.schema.path('contact').validate(val => {
 Task.schema.path('review.status').validate(val => {
     return ['r1', 'r2'].indexOf(val) >= 0;
 }, '审核状态有误');
-Task.schema.path('creator._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '发布者ID有误');
-Task.schema.path('business._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '行业ID有误');
-Task.schema.path('merchant._id').validate(val => {
-    return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(val);
-}, '商户ID有误');
 
 export default Task;

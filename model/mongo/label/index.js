@@ -14,6 +14,10 @@ const LabelSchema = new mongoose.Schema({
     review  : {
         // 审核状态
         status   : Boolean,
+        // 审核人
+        user     : {
+            _id: mongoose.Schema.Types.ObjectId
+        },
         // 审核时间
         timestamp: Date
     },
