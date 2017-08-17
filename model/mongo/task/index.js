@@ -142,8 +142,5 @@ Task.schema.path('labels').validate(val => {
 Task.schema.path('contact').validate(val => {
     return !val || /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(val);
 }, '联系方式格式错误');
-Task.schema.path('review.status').validate(val => {
-    return ['r1', 'r2'].indexOf(val) >= 0;
-}, '审核状态有误');
 
 export default Task;
