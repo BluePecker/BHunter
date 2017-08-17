@@ -17,8 +17,12 @@ const TaskSchema = new mongoose.Schema({
     contact : String,
     // 审核
     review  : {
-        // 状态 (r1: 发布待审, r2: 审核通过)
-        status   : String,
+        // 审核人
+        user     : {
+            _id: mongoose.Schema.Types.ObjectId
+        },
+        // 状态
+        status   : Boolean,
         // 审核时间
         timestamp: Date
     },
@@ -93,13 +97,30 @@ TaskSchema.index({
  * 新增或修改任务
  */
 TaskSchema.statics = {
-    // 审核任务
-    review: (id) => {
+    // 通过
+    adopt(id, user) {
         return this.findByIdAndUpdate(id, {
             $set: {
                 review: {
                     timestamp: new Date,
-                    status   : 'r2'
+                    status   : true,
+                    user     : user
+                }
+            }
+        }).exec().then(res => {
+            return res;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+    // 驳回
+    reject(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    timestamp: new Date,
+                    status   : false,
+                    user     : user
                 }
             }
         }).exec().then(res => {
