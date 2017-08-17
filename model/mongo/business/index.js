@@ -12,13 +12,19 @@ import mongoose from 'mongoose';
 const BusinessSchema = new mongoose.Schema({
     // 审核状态
     review : {
+        // 审核人
+        user     : {
+            _id: mongoose.Schema.Types.ObjectId
+        },
+        // 状态
         status   : {type: Boolean, default: false},
+        // 审核时间
         timestamp: Date
     },
     // 删除时间
     deleted: Date,
     // 行业名
-    name   : {type: String, index: {unique: true}},
+    name   : {type: String, unique: true},
     // 创建者
     creator: {
         _id: mongoose.Schema.Types.ObjectId
@@ -33,16 +39,63 @@ const BusinessSchema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-// 添加内建方法
+BusinessSchema.index({
+    name: 'unique'
+});
+
 BusinessSchema.statics = {
-    // 新建行业
-    create: (business) => {
-        return (new Business({
+    // 创建行业
+    create(business) {
+        return (new this({
             parent : business.parent || '',
             name   : business.name || '',
             creator: business.creator || ''
         })).save().then(business => {
             return business;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 行业列表
+    list() {
+        return this.find({
+            'review.status': true,
+            'deleted'      : {
+                $exists: false
+            }
+        }, '_id name').then(docs => {
+            return docs;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 通过
+    adopt(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : true,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 驳回
+    reject(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : false,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
         }).catch(err => {
             return bluebird.reject(err);
         });
