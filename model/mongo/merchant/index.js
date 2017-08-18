@@ -1,7 +1,7 @@
 /**
  * Created by shuc on 17/8/17.
  */
-import mongoose from 'mongoose';
+import mongoose from '../index';
 
 const MerchantSchema = new mongoose.Schema({
     // 审核
@@ -70,7 +70,7 @@ const MerchantSchema = new mongoose.Schema({
 });
 
 MerchantSchema.statics = {
-    
+
 };
 
 export default mongoose.model('merchant', MerchantSchema);

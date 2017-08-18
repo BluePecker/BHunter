@@ -2,7 +2,7 @@
  * Created by shuc on 17/8/17.
  */
 import bluebird from 'bluebird';
-import mongoose from 'mongoose';
+import mongoose from '../index';
 
 /**
  * The complete bluebird, or one or more components of the bluebird.
