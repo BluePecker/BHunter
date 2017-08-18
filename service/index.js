@@ -10,7 +10,7 @@ class Service extends ResponseCode {
     constructor() {
         super();
         // interceptor
-        return new Proxy(this, {
+        const interceptor = {
             get: (target, name) => {
                 if (typeof target[name] != 'function') {
                     return Reflect.get(target, name);
@@ -29,7 +29,8 @@ class Service extends ResponseCode {
             set: (target, name, value, receiver) => {
                 return Reflect.set(target, name, value, receiver);
             }
-        });
+        };
+        return new Proxy(this, interceptor);
     }
 
     /**
