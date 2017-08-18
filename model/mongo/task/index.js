@@ -2,7 +2,7 @@
  * Created by shuc on 17/8/1.
  */
 import bluebird from 'bluebird';
-import mongoose from '../index';
+import mongoose from 'mongoose';
 /**
  * The complete bluebird, or one or more components of the bluebird.
  * @typedef {object} bluebird

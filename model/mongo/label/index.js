@@ -24,7 +24,7 @@ const LabelSchema = new mongoose.Schema({
     // 标签名
     name    : String,
     // 删除时间
-    deleted : Date,
+    deleted : {type: Date, default: null},
     // 标签描述
     describe: String,
     // 创建者
@@ -35,8 +35,9 @@ const LabelSchema = new mongoose.Schema({
     parent  : {
         _id: mongoose.Schema.Types.ObjectId
     }
-}, {versionKey: false, timestamps: {createdAt: 'created', updatedAt: 'modified'}});
+}, {
+    versionKey: false,
+    timestamps: {createdAt: 'created', updatedAt: 'modified'}
+});
 
-const Label = mongoose.model('label', LabelSchema);
-
-export default Label;
+export default mongoose.model('label', LabelSchema);
