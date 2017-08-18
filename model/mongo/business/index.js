@@ -22,7 +22,7 @@ const BusinessSchema = new mongoose.Schema({
         timestamp: Date
     },
     // 删除时间
-    deleted: Date,
+    deleted: {type: Date, default: null},
     // 行业名
     name   : {type: String, unique: true},
     // 创建者
@@ -59,11 +59,9 @@ BusinessSchema.statics = {
 
     // 行业列表
     list() {
-        return this.find({
-            'review.status': true,
-            'deleted'      : {
-                $exists: false
-            }
+        return this.findOne({
+            'deleted'      : null,
+            'review.status': true
         }, '_id name').then(docs => {
             return docs;
         }).catch(err => {

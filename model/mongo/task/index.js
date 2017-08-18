@@ -59,6 +59,8 @@ const TaskSchema = new mongoose.Schema({
         // 文件id
         _id     : mongoose.Schema.Types.ObjectId
     }],
+    // 删除时间
+    deleted : {type: Date, default: null},
     // 截止日期
     deadline: {
         type: Date
@@ -93,10 +95,20 @@ TaskSchema.index({
     location: "2dsphere"
 });
 
-/**
- * 新增或修改任务
- */
 TaskSchema.statics = {
+    // 详情
+    detail(id){
+        return this.findOne({
+            '_id'          : id,
+            'deleted'      : null,
+            'review.status': true
+        }).then(task => {
+            return task;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
     // 通过
     adopt(id, user) {
         return this.findByIdAndUpdate(id, {

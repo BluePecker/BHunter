@@ -7,8 +7,10 @@ import Task from '../../model/mongo/task';
 
 class TaskService extends Service {
     create = (ctx) => {
-        return (new Task(ctx.request.body)).save().then(res => {
-            this.response(Service.SUCCESS, res);
+        return (new Task(ctx.request.body)).save().then(doc => {
+            this.response(Service.SUCCESS, {
+                _id: doc._id
+            });
         }).catch(err => {
             this.response(Service.FAILURE, err.message);
         });
@@ -20,6 +22,16 @@ class TaskService extends Service {
         //     });
         // });
     };
+
+    detail = (ctx) => {
+        return Task.detail(ctx.request.body).then(doc => {
+            return doc;
+        }).then(doc => {
+            this.response(Service.SUCCESS, doc);
+        }).catch(err => {
+            this.response(Service.FAILURE, err.message);
+        });
+    }
 }
 
 export default new TaskService();
