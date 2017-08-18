@@ -1,19 +1,18 @@
 /**
  * Created by shuc on 17/8/18.
  */
+import bluebird from 'bluebird';
 import mongoose from '../index';
 
 const StorageSchema = new mongoose.Schema({
     // 删除时间
-    deleted : {type: Date, default: null},
-    // 标签描述
-    describe: String,
+    deleted: {type: Date, default: null},
     // 创建者
-    creator : {
+    creator: {
         _id: mongoose.Schema.Types.ObjectId
     },
     // 数据保存地址
-    address : {
+    address: {
         // 路径
         route   : String,
         // 数据储存位置
@@ -23,5 +22,19 @@ const StorageSchema = new mongoose.Schema({
     versionKey: false,
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
+
+StorageSchema.statics = {
+    // 批量写入数据
+    addBatch(arr, user) {
+        this.insertMany(arr.map(item => {
+            item.creator = user;
+            return item;
+        })).then(docs => {
+            return docs;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    }
+};
 
 export default mongoose.model('storage', StorageSchema);

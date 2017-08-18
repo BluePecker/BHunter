@@ -16,8 +16,12 @@ class Service extends ResponseCode {
                     return Reflect.get(target, name);
                 }
                 return (...args) => {
-                    if (typeof args[0] === 'object') {
-                        Reflect.has(args[0], 'body') && Reflect.set(target, 'ctx', args[0]);
+                    if (typeof args[0] == 'object' && Reflect.has(args[0], 'body')) {
+                        Reflect.set(target, 'ctx', args[0]);
+                        // for auth
+                        if (!Reflect.apply(target['auth'], target, [])) {
+                            return this.failure('auth failed');
+                        }
                     }
                     return Reflect.apply(target[name], target, args);
                 };
@@ -28,38 +32,66 @@ class Service extends ResponseCode {
         });
     }
 
+    /**
+     * 权限验证
+     * @returns {boolean}
+     */
+    auth() {
+        const header = this.ctx.headers;
+        this.ctx.user = {
+            _id: header['json-web-token']
+        };
+        return header['json-web-token'] ? true : false;
+    }
+
+    /**
+     * 应答
+     * @param code
+     * @param data
+     * @param message
+     */
     response(code, data, message) {
         if (typeof data == 'string') {
             message = data;
             data = null;
         }
         this.ctx.body = {
-            code: code,
-            data: data || {},
+            code   : code,
+            data   : data || {},
             message: message
         };
     }
 
+    /**
+     * 成功
+     * @param data
+     * @param message
+     */
     success(data, message) {
         if (typeof data == 'string') {
             message = data;
             data = null;
         }
         this.ctx.body = {
-            code: ResponseCode.SUCCESS,
-            data: data || {},
+            code   : ResponseCode.SUCCESS,
+            data   : data || {},
             message: message
         };
     }
 
+    /**
+     * 失败
+     * @param data
+     * @param message
+     */
     failure(data, message) {
         if (typeof data == 'string') {
             message = data;
             data = null;
         }
         this.ctx.body = {
-            code: ResponseCode.FAILURE,
-            data: data || {},
+            code   : ResponseCode.FAILURE,
+            data   : data || {},
             message: message
         };
     }
