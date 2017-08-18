@@ -37,6 +37,7 @@
         "nodemailer": "^4.0.1",
         "parse-dburi": "^0.2.1",
         "path-exists": "^3.0.0",
+        "qiniu": "^7.0.6",
         "sequelize": "^4.4.2",
         "uuid": "^3.1.0",
         "webpack": "^3.4.1"

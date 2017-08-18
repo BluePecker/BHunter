@@ -69,5 +69,12 @@
                 "level": "info"
             }
         }
+    },
+    "Qiniu": {
+        "bucket": "bileji",
+        "key": {
+            "access": "2ajU0NKLYFwS26j8T-bwGvUmfrLdJWHIGchdH4X",
+            "secret": "j-Vex2BSRS5-QXauP4aad024Smdgzh7CkGk4uJQ_"
+        }
     }
 }
