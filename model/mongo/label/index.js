@@ -47,8 +47,8 @@ LabelSchema.statics = {
             parent : label.parent || '',
             name   : label.name || '',
             creator: label.creator || ''
-        })).save().then(business => {
-            return business;
+        })).save().then(label => {
+            return label;
         }).catch(err => {
             return bluebird.reject(err);
         });
