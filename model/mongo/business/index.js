@@ -59,11 +59,16 @@ BusinessSchema.statics = {
 
     // 行业列表
     list() {
-        return this.findOne({
+        return this.findAll({
             'deleted'      : null,
             'review.status': true
-        }, '_id name').then(docs => {
-            return docs;
+        }).then(docs => {
+            return docs.map(item => {
+                return {
+                    _id : item._id,
+                    name: item.name
+                };
+            });
         }).catch(err => {
             return bluebird.reject(err);
         });
