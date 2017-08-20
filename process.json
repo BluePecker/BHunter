@@ -2,7 +2,8 @@
     "apps": [
         {
             "name": "service",
-            "script": "./app.js",
+            "script": "npm",
+            "args": "begin",
             "watch": true,
             "env": {
                 "NODE_ENV": "production"
