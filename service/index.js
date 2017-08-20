@@ -58,7 +58,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : code,
-            data   : data || {},
+            data   : (Array.isArray(data) ? {list: data} : data) || {},
             message: message
         };
     }
@@ -75,7 +75,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : ResponseCode.SUCCESS,
-            data   : data || {},
+            data   : (Array.isArray(data) ? {list: data} : data) || {},
             message: message
         };
     }
@@ -92,7 +92,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : ResponseCode.FAILURE,
-            data   : data || {},
+            data   : (Array.isArray(data) ? {list: data} : data) || {},
             message: message
         };
     }
