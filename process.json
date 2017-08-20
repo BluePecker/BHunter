@@ -3,7 +3,7 @@
         {
             "name": "service",
             "script": "npm",
-            "args": "begin",
+            "args": "run begin",
             "watch": true,
             "env": {
                 "NODE_ENV": "production"
