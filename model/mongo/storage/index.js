@@ -26,7 +26,7 @@ const StorageSchema = new mongoose.Schema({
 StorageSchema.statics = {
     // 批量写入数据
     addBatch(arr, user) {
-        this.insertMany(arr.map(item => {
+        return this.insertMany(arr.map(item => {
             item.creator = user;
             return item;
         })).then(docs => {
