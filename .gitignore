@@ -63,3 +63,6 @@ package-lock.json
 
 # test script
 test.js
+
+# config
+!config/default.json
