@@ -3,15 +3,15 @@
  */
 import Router from '../router';
 
-import Task from '../../service/business';
+import Business from '../../service/business';
 
 const V1 = new Router({
     prefix: '/business'
 });
 
-V1.post('/create', Task.create);
-V1.post('/list', Task.list);
-V1.post('/adopt', Task.adopt);
-V1.post('/reject', Task.reject);
+V1.post('/create', Business.create);
+V1.post('/list', Business.list);
+V1.post('/adopt', Business.adopt);
+V1.post('/reject', Business.reject);
 
 export default V1;
