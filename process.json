@@ -2,7 +2,7 @@
     "apps": [
         {
             "name": "service",
-            "script": "git pull origin master && ./app.js",
+            "script": "/usr/bin/git pull origin master && ./app.js",
             "watch": true,
             "env": {
                 "NODE_ENV": "production"
