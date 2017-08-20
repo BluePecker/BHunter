@@ -52,6 +52,48 @@ LabelSchema.statics = {
         }).catch(err => {
             return bluebird.reject(err);
         });
+    },
+
+    // 标签列表
+    list() {
+        return this.findOne({
+            'deleted'      : null,
+            'review.status': true
+        }, '_id name').then(docs => {
+            return docs;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 通过
+    adopt(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : true,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 驳回
+    reject(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : false,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
     }
 };
 
