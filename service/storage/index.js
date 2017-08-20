@@ -6,7 +6,7 @@ import Storage from '../../model/mongo/storage';
 
 class StorageService extends Service {
     /**
-     * 对角存储
+     * 对象存储
      * @param ctx
      * @returns {*|Promise|Promise.<T>}
      */
