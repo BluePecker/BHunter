@@ -2,9 +2,8 @@
     "apps": [
         {
             "name": "service",
-            "script": "npm",
-            "args": "run begin",
-            "watch": true,
+            "script": "babel-node",
+            "args": "app.js",
             "env": {
                 "NODE_ENV": "production"
             }
