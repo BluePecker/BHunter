@@ -13,6 +13,32 @@ class LabelService extends Service {
             this.response(Service.FAILURE, err.errmsg);
         });
     };
+
+    list = () => {
+        return Label.list().then(label => {
+            this.response(Service.SUCCESS, label);
+        }).catch(err => {
+            this.response(Service.FAILURE, err.errmsg);
+        });
+    };
+
+    adopt = (ctx) => {
+        const params = ctx.request.body;
+        return Label.adopt(params.business, params.user).then(() => {
+            this.response(Service.SUCCESS);
+        }).catch(err => {
+            this.response(Service.FAILURE, err.errmsg);
+        });
+    };
+
+    reject = (ctx) => {
+        const params = ctx.request.body;
+        return Label.reject(params.business, params.user).then(() => {
+            this.response(Service.SUCCESS);
+        }).catch(err => {
+            this.response(Service.FAILURE, err.errmsg);
+        });
+    };
 }
 
 export default new LabelService();

@@ -8,7 +8,6 @@ class BusinessService extends Service {
     /**
      * @typedef {{errmsg: string}} err
      */
-
     create = (ctx) => {
         const params = ctx.request.body;
         return Business.create(params).then(business => {
