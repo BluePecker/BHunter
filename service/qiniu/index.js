@@ -14,11 +14,11 @@ class QiniuService extends Service {
         const qiniu = Config.get('Qiniu') || {};
         const mac = new Qiniu.auth.digest.Mac(qiniu.key.access, qiniu.key.secret);
         this.response(Service.SUCCESS, {
-            token: new Qiniu.rs.PutPolicy({
-                // 上传凭证有效期30分钟
-                expires: 30 * 60,
+            token: (new Qiniu.rs.PutPolicy({
+                // 上传凭证有效期60分钟
+                expires: 2 * 60 * 60,
                 scope  : qiniu.bucket
-            }).uploadToken(mac)
+            })).uploadToken(mac)
         });
     }
 }

@@ -34,6 +34,19 @@ StorageSchema.statics = {
         }).catch(err => {
             return bluebird.reject(err);
         });
+    },
+
+    getAddress(id) {
+        return this.findAll({
+            deleted: null,
+            _id    : {
+                $in: Array.isArray(id) ? id : [id]
+            }
+        }).then(docs => {
+            return docs;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
     }
 };
 
