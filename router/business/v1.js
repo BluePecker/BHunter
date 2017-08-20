@@ -5,7 +5,9 @@ import Router from '../router';
 
 import Task from '../../service/business';
 
-const V1 = new Router({prefix: '/business'});
+const V1 = new Router({
+    prefix: '/business'
+});
 
 V1.post('/create', Task.create);
 V1.post('/list', Task.list);
