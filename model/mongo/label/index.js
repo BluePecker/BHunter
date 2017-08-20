@@ -1,7 +1,7 @@
 /**
  * Created by shuc on 17/8/16.
  */
-// import bluebird from 'bluebird';
+import bluebird from 'bluebird';
 import mongoose from '../index';
 
 /**
@@ -39,5 +39,20 @@ const LabelSchema = new mongoose.Schema({
     versionKey: false,
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
+
+LabelSchema.statics = {
+    // 创建标签
+    create(label) {
+        return (new this({
+            parent : label.parent || '',
+            name   : label.name || '',
+            creator: label.creator || ''
+        })).save().then(business => {
+            return business;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    }
+};
 
 export default mongoose.model('label', LabelSchema);
