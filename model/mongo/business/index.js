@@ -64,9 +64,6 @@ BusinessSchema.statics = {
             'review.status': true
         }).then(docs => {
             return docs.map(item => {
-                /**
-                 * @typedef {{parent:string,name:string}} item
-                 */
                 return {
                     _id   : item._id,
                     name  : item.name,
