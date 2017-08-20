@@ -36,13 +36,21 @@ StorageSchema.statics = {
         });
     },
 
-    getAddress(id) {
+    // 获取存储路径
+    getAddrByIds(id) {
         return this.findAll({
             deleted: null,
             _id    : {
                 $in: Array.isArray(id) ? id : [id]
             }
         }).then(docs => {
+            docs.__proto__.toObject = () => {
+                var container = {};
+                docs.forEach(item => {
+                    container[item._id] = item;
+                });
+                return container;
+            };
             return docs;
         }).catch(err => {
             return bluebird.reject(err);
