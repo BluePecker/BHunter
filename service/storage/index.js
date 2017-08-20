@@ -11,19 +11,21 @@ class StorageService extends Service {
      * @returns {*|Promise|Promise.<T>}
      */
     save = (ctx) => {
-        return Storage.addBatch(ctx.request.body, ctx.user).then(objects => {
-            this.success(objects.map(item => {
-                return {
-                    _id    : item._id,
-                    address: item.address || {
-                        route   : '',
-                        location: ''
-                    }
-                };
-            }));
-        }).catch(err => {
-            this.failure(err.errmsg);
-        });
+        const params = ctx.request.body;
+        return Storage.addBatch(params, ctx.user)
+            .then(objects => {
+                this.success(objects.map(item => {
+                    return {
+                        _id    : item._id,
+                        address: item.address || {
+                            route   : '',
+                            location: ''
+                        }
+                    };
+                }));
+            }).catch(err => {
+                this.failure(err.errmsg);
+            });
     }
 }
 
