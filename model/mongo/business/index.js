@@ -62,7 +62,7 @@ BusinessSchema.statics = {
         return this.find({
             'deleted'      : null,
             'review.status': true
-        }).then(docs => {
+        }, 'name parent').then(docs => {
             return docs.map(item => {
                 return {
                     _id   : item._id,

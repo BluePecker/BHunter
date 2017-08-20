@@ -56,11 +56,17 @@ LabelSchema.statics = {
 
     // 标签列表
     list() {
-        return this.findOne({
+        return this.find({
             'deleted'      : null,
             'review.status': true
-        }, '_id name').then(docs => {
-            return docs;
+        }, '_id name parent').then(docs => {
+            return docs.map(item => {
+                return {
+                    _id   : item._id,
+                    name  : item.name,
+                    parent: item.parent
+                };
+            });
         }).catch(err => {
             return bluebird.reject(err);
         });
