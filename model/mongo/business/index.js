@@ -59,7 +59,7 @@ BusinessSchema.statics = {
 
     // 行业列表
     list() {
-        return this.findAll({
+        return this.find({
             'deleted'      : null,
             'review.status': true
         }).then(docs => {
