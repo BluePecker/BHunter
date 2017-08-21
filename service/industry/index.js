@@ -10,16 +10,16 @@ class IndustryService extends Service {
      */
     create = (ctx) => {
         const params = ctx.request.body;
-        return Industry.create(params).then(business => {
-            this.response(Service.SUCCESS, business);
+        return Industry.create(params).then(industry => {
+            this.response(Service.SUCCESS, industry);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
         });
     };
 
     list = () => {
-        return Industry.list().then(businesses => {
-            this.response(Service.SUCCESS, businesses);
+        return Industry.list().then(industry => {
+            this.response(Service.SUCCESS, industry);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
         });
@@ -27,7 +27,7 @@ class IndustryService extends Service {
 
     adopt = (ctx) => {
         const params = ctx.request.body;
-        return Industry.adopt(params.business, params.user).then(() => {
+        return Industry.adopt(params, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -36,7 +36,7 @@ class IndustryService extends Service {
 
     reject = (ctx) => {
         const params = ctx.request.body;
-        return Industry.reject(params.business, params.user).then(() => {
+        return Industry.reject(params, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);

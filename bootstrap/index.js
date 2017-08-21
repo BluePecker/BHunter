@@ -126,6 +126,7 @@ class Bootstrap {
                     (name === 'default' || name == 'route') && (name = 'v1');
                     // for version
                     this.app.use(Mount(`/${name}`, route.middleware()));
+                    this.app.use(route.allowedMethods());
                 });
             });
         }, 'dir');
