@@ -3,15 +3,17 @@
  */
 import Router from '../router';
 
-import Label from '../../service/label';
+// import Label from '../../service/label';
 
-const V1 = new Router({
-    prefix: '/label'
+const V1 = new Router('label', {
+    get : {
+        '/list': 'list'
+    },
+    post: {
+        '/create': 'create',
+        '/adopt' : 'adopt',
+        '/reject': 'reject'
+    }
 });
-
-V1.post('/create', Label.create);
-V1.post('/list', Label.list);
-V1.post('/adopt', Label.adopt);
-V1.post('/reject', Label.reject);
 
 export default V1;

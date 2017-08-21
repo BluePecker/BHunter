@@ -3,14 +3,14 @@
  */
 import Router from '../router';
 
-const Route = new Router();
+const Route = new Router('user');
 
 Route.get('/user', (ctx, next) => {
     ctx.body = 'hi user';
     next();
 });
 
-const V1 = new Router();
+const V1 = new Router('user');
 
 V1.get('/user', (ctx) => {
     ctx.body = 'user';
