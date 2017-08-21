@@ -6,13 +6,15 @@ import Router from '../router';
 // import Label from '../../service/label';
 
 const V1 = new Router('label', {
-    get : {
-        '/list': 'list'
-    },
-    post: {
-        '/create': 'create',
+    patch: {
         '/adopt' : 'adopt',
         '/reject': 'reject'
+    },
+    get  : {
+        '/list': 'list'
+    },
+    post : {
+        '/create': 'create'
     }
 });
 
