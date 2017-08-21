@@ -8,7 +8,9 @@ class LabelService extends Service {
     create = (ctx) => {
         const params = ctx.request.body;
         return Label.create(params).then(label => {
-            this.response(Service.SUCCESS, label);
+            this.response(Service.SUCCESS, {
+                _id: label._id
+            });
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
         });
