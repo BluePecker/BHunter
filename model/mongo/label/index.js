@@ -22,7 +22,7 @@ const LabelSchema = new mongoose.Schema({
         timestamp: Date
     },
     // 标签名
-    name    : String,
+    name    : {type: String, unique: true},
     // 删除时间
     deleted : {type: Date, default: null},
     // 标签描述
@@ -38,6 +38,10 @@ const LabelSchema = new mongoose.Schema({
 }, {
     versionKey: false,
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
+});
+
+LabelSchema.index({
+    name: 'unique'
 });
 
 LabelSchema.statics = {
