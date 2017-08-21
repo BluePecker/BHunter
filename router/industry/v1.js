@@ -3,7 +3,7 @@
  */
 import Router from '../router';
 
-const V1 = new Router('business', {
+const V1 = new Router('industry', {
     get : {
         '/list': 'list'
     },

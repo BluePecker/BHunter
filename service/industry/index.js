@@ -2,15 +2,15 @@
  * Created by shuc on 17/8/17.
  */
 import Service from '../index';
-import Business from '../../model/mongo/business';
+import Industry from '../../model/mongo/industry';
 
-class BusinessService extends Service {
+class IndustryService extends Service {
     /**
      * @typedef {{errmsg: string}} err
      */
     create = (ctx) => {
         const params = ctx.request.body;
-        return Business.create(params).then(business => {
+        return Industry.create(params).then(business => {
             this.response(Service.SUCCESS, business);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -18,7 +18,7 @@ class BusinessService extends Service {
     };
 
     list = () => {
-        return Business.list().then(businesses => {
+        return Industry.list().then(businesses => {
             this.response(Service.SUCCESS, businesses);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -27,7 +27,7 @@ class BusinessService extends Service {
 
     adopt = (ctx) => {
         const params = ctx.request.body;
-        return Business.adopt(params.business, params.user).then(() => {
+        return Industry.adopt(params.business, params.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -36,7 +36,7 @@ class BusinessService extends Service {
 
     reject = (ctx) => {
         const params = ctx.request.body;
-        return Business.reject(params.business, params.user).then(() => {
+        return Industry.reject(params.business, params.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -44,4 +44,4 @@ class BusinessService extends Service {
     };
 }
 
-export default new BusinessService();
+export default new IndustryService();
