@@ -3,23 +3,17 @@
  */
 import Router from '../router';
 
-// import Label from '../../service/label';
-
 const V1 = new Router('label', {
-    put : {
+    patch: {
         '/adopt' : 'adopt',
         '/reject': 'reject'
     },
-    get : {
+    get  : {
         '/list': 'list'
     },
-    post: {
+    post : {
         '/create': 'create'
     }
 });
-
-// V1.put('/test', ctx => {
-//     ctx.body = 'xxx';
-// });
 
 export default V1;
