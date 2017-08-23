@@ -82,30 +82,30 @@ Schema.statics = {
             'review.status': true
         }, 'name parent').then(docs => {
             // 根据父级id降序排列
-            let Swap = (arr, a, b) => {
-                var temp = arr[a];
-                arr[a] = arr[b];
-                arr[b] = temp;
-            };
-            let QuickSort = (arr, left, right) => {
-                if (left > right) {
-                    return [];
-                }
-                let i = left + 1;
-                let index = left;
-                while (i <= right) {
-                    let a = arr[i].parent._id || "";
-                    let b = arr[left].parent._id || "";
-                    if (a > b) {
-                        Swap(arr, i, ++index);
-                    }
-                    ++i;
-                }
-                Swap(arr, left, index);
-                QuickSort(arr, left, index - 1);
-                QuickSort(arr, index + 1, right);
-            };
-            QuickSort(docs, 0, docs.length - 1);
+            // let Swap = (arr, a, b) => {
+            //     var temp = arr[a];
+            //     arr[a] = arr[b];
+            //     arr[b] = temp;
+            // };
+            // let QuickSort = (arr, left, right) => {
+            //     if (left > right) {
+            //         return [];
+            //     }
+            //     let i = left + 1;
+            //     let index = left;
+            //     while (i <= right) {
+            //         let a = arr[i].parent._id || "";
+            //         let b = arr[left].parent._id || "";
+            //         if (a > b) {
+            //             Swap(arr, i, ++index);
+            //         }
+            //         ++i;
+            //     }
+            //     Swap(arr, left, index);
+            //     QuickSort(arr, left, index - 1);
+            //     QuickSort(arr, index + 1, right);
+            // };
+            // QuickSort(docs, 0, docs.length - 1);
             return JSON.parse(JSON.stringify(docs));
         }).then(docs => {
             let obj = {};
