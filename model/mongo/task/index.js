@@ -8,7 +8,7 @@ import mongoose from '../index';
  * @typedef {object} bluebird
  * @property {function} reject - Indicates whether the Courage component is reject.
  */
-const TaskSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     // 描述
     describe: String,
     // 标题
@@ -90,12 +90,12 @@ const TaskSchema = new mongoose.Schema({
 });
 
 // 添加索引
-TaskSchema.index({
+Schema.index({
     // 位置索引
     location: "2dsphere"
 });
 
-TaskSchema.statics = {
+Schema.statics = {
     // 详情
     detail(id){
         return this.findOne({
@@ -144,7 +144,7 @@ TaskSchema.statics = {
     }
 };
 
-const Task = mongoose.model('task', TaskSchema);
+const Task = mongoose.model('task', Schema);
 
 Task.schema.path('labels').validate(val => {
     return val.every(item => {

@@ -9,7 +9,7 @@ import mongoose from '../index';
  * @typedef {object} bluebird
  * @property {function} reject - Indicates whether the Courage component is reject.
  */
-const LabelSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     // 审核
     review  : {
         // 审核状态
@@ -40,11 +40,11 @@ const LabelSchema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-LabelSchema.index({
+Schema.index({
     name: 'unique'
 });
 
-LabelSchema.statics = {
+Schema.statics = {
     // 创建标签
     create(label) {
         return (new this({
@@ -107,4 +107,4 @@ LabelSchema.statics = {
     }
 };
 
-export default mongoose.model('label', LabelSchema);
+export default mongoose.model('label', Schema);

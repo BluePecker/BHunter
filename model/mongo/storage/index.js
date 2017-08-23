@@ -4,7 +4,7 @@
 import bluebird from 'bluebird';
 import mongoose from '../index';
 
-const StorageSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     // 删除时间
     deleted: {type: Date, default: null},
     // 创建者
@@ -23,7 +23,7 @@ const StorageSchema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-StorageSchema.statics = {
+Schema.statics = {
     // 批量写入数据
     addBatch(arr, user) {
         return this.insertMany(arr.map(item => {
@@ -58,4 +58,4 @@ StorageSchema.statics = {
     }
 };
 
-export default mongoose.model('storage', StorageSchema);
+export default mongoose.model('storage', Schema);

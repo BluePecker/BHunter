@@ -3,7 +3,7 @@
  */
 import mongoose from '../index';
 
-const MerchantSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     // 审核
     review     : {
         status   : Boolean,
@@ -69,8 +69,8 @@ const MerchantSchema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-MerchantSchema.statics = {
+Schema.statics = {
 
 };
 
-export default mongoose.model('merchant', MerchantSchema);
+export default mongoose.model('merchant', Schema);

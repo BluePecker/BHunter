@@ -9,7 +9,7 @@ import mongoose from '../index';
  * @typedef {object} bluebird
  * @property {function} reject - Indicates whether the Courage component is reject.
  */
-const IndustrySchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
     // 审核状态
     review : {
         // 审核人
@@ -39,11 +39,11 @@ const IndustrySchema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-IndustrySchema.index({
+Schema.index({
     name: 'unique'
 });
 
-IndustrySchema.statics = {
+Schema.statics = {
     // 创建行业
     create(business) {
         return (new this({
@@ -106,6 +106,6 @@ IndustrySchema.statics = {
     }
 };
 
-const Industry = mongoose.model('industry', IndustrySchema);
+const Industry = mongoose.model('industry', Schema);
 
 export default Industry;
