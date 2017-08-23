@@ -4,16 +4,16 @@
 import Router from '../router';
 
 const V1 = new Router('industry', {
+    patch: {
+        '/adopt' : 'adopt',
+        '/reject': 'reject'
+    },
     get  : {
         '/list': 'list',
         '/tree': 'tree'
     },
     post : {
         '/create': 'create'
-    },
-    patch: {
-        '/adopt' : 'adopt',
-        '/reject': 'reject'
     }
 });
 
