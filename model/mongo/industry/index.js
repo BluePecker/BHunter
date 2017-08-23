@@ -75,6 +75,64 @@ Schema.statics = {
         });
     },
 
+    // 行业树形
+    tree() {
+        return this.find({
+            'deleted'      : null,
+            'review.status': true
+        }, 'name parent').then(docs => {
+            // 根据父级id降序排列
+            let Swap = (arr, a, b) => {
+                var temp = arr[a];
+                arr[a] = arr[b];
+                arr[b] = temp;
+            };
+            let QuickSort = (arr, left, right) => {
+                if (left > right) {
+                    return [];
+                }
+                let i = left + 1;
+                let index = left;
+                while (i <= right) {
+                    let a = arr[i].parent._id || "";
+                    let b = arr[left].parent._id || "";
+                    if (a > b) {
+                        Swap(arr, i, ++index);
+                    }
+                    ++i;
+                }
+                Swap(arr, left, index);
+                QuickSort(arr, left, index - 1);
+                QuickSort(arr, index + 1, right);
+            };
+            QuickSort(docs, 0, docs.length - 1);
+            return docs;
+        }).then(docs => {
+            let obj = {};
+            docs.forEach(item => {
+                item.son = [];
+                obj[item._id] = item;
+            });
+            return obj;
+        }).then(docs => {
+            Object.keys(docs).forEach(key => {
+                let pid = docs[key].parent._id;
+                if (pid && docs[pid]) {
+                    docs[pid].son.push(docs[key]);
+                }
+            });
+            return docs;
+        }).then(docs => {
+            let container = [];
+            Object.keys(docs).forEach(key => {
+                !docs[key].parent._id && container.push(docs[key]);
+            });
+            return container;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
     // 通过
     adopt(id, user) {
         return this.findByIdAndUpdate(id, {

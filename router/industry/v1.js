@@ -5,7 +5,8 @@ import Router from '../router';
 
 const V1 = new Router('industry', {
     get : {
-        '/list': 'list'
+        '/list': 'list',
+        '/tree': 'tree'
     },
     post: {
         '/create': 'create',

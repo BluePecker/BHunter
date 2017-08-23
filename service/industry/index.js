@@ -25,6 +25,14 @@ class IndustryService extends Service {
         });
     };
 
+    tree = () => {
+        return Industry.tree().then(industry => {
+            this.response(Service.SUCCESS, industry);
+        }).catch(err => {
+            this.response(Service.FAILURE, err.errmsg);
+        });
+    };
+
     adopt = (ctx) => {
         const params = ctx.request.body;
         return Industry.adopt(params, ctx.user).then(() => {
