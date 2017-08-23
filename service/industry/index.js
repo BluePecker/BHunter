@@ -11,7 +11,9 @@ class IndustryService extends Service {
     create = (ctx) => {
         const params = ctx.request.body;
         return Industry.create(params).then(industry => {
-            this.response(Service.SUCCESS, industry);
+            this.response(Service.SUCCESS, {
+                _id: industry._id
+            });
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
         });
