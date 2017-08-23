@@ -4,12 +4,14 @@
 import Router from '../router';
 
 const V1 = new Router('industry', {
-    get : {
+    get  : {
         '/list': 'list',
         '/tree': 'tree'
     },
-    post: {
-        '/create': 'create',
+    post : {
+        '/create': 'create'
+    },
+    patch: {
         '/adopt' : 'adopt',
         '/reject': 'reject'
     }
