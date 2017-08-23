@@ -45,7 +45,7 @@ Schema.index({
 });
 
 Schema.statics = {
-    // 创建行业
+    // 创建
     create(business) {
         return (new this({
             parent : business.parent || '',
@@ -58,7 +58,7 @@ Schema.statics = {
         });
     },
 
-    // 行业列表
+    // 列表
     list() {
         return this.find({
             'deleted'      : null,
@@ -76,7 +76,7 @@ Schema.statics = {
         });
     },
 
-    // 行业树形
+    // 树形
     tree() {
         return this.find({
             'deleted'      : null,
