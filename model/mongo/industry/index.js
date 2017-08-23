@@ -106,7 +106,7 @@ Schema.statics = {
                 QuickSort(arr, index + 1, right);
             };
             QuickSort(docs, 0, docs.length - 1);
-            return docs;
+            return JSON.parse(JSON.stringify(docs));
         }).then(docs => {
             let obj = {};
             docs.forEach(item => {
@@ -116,10 +116,9 @@ Schema.statics = {
             return obj;
         }).then(docs => {
             Object.keys(docs).forEach(key => {
+                docs[key].parent = docs[key].parent || {};
                 let pid = docs[key].parent._id;
-                if (pid && docs[pid]) {
-                    docs[pid].son.push(docs[key]);
-                }
+                docs[pid] && docs[pid].son.push(docs[key]);
             });
             return docs;
         }).then(docs => {
