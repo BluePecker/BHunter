@@ -65,4 +65,5 @@ package-lock.json
 test.js
 
 # config
+config/*.json
 !config/default.json
