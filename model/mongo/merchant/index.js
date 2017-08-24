@@ -44,10 +44,12 @@ const Schema = new mongoose.Schema({
             },
             // 身份证
             IDCard: {
+                // 正面照
                 positive: {
                     _id     : mongoose.Schema.Types.ObjectId,
                     describe: String
                 },
+                // 背面照
                 negative: {
                     _id     : mongoose.Schema.Types.ObjectId,
                     describe: String
