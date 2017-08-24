@@ -46,11 +46,11 @@ Schema.index({
 
 Schema.statics = {
     // 创建标签
-    create(label) {
+    create(label, user) {
         return (new this({
             parent : label.parent || '',
             name   : label.name || '',
-            creator: label.creator || ''
+            creator: user
         })).save().then(label => {
             return label;
         }).catch(err => {
@@ -60,7 +60,7 @@ Schema.statics = {
 
     // 标签列表
     list() {
-        return this.find({
+        return Schema.find({
             'deleted'      : null,
             'review.status': true
         }, 'name parent').then(docs => {

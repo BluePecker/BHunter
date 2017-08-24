@@ -7,7 +7,7 @@ import Label from '../../model/mongo/label';
 class LabelService extends Service {
     create = (ctx) => {
         const params = ctx.request.body;
-        return Label.create(params).then(label => {
+        return Label.create(params, ctx.user).then(label => {
             this.response(Service.SUCCESS, {
                 _id: label._id
             });
@@ -26,7 +26,7 @@ class LabelService extends Service {
 
     adopt = (ctx) => {
         const params = ctx.request.body;
-        return Label.adopt(params, params.user).then(() => {
+        return Label.adopt(params, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -35,7 +35,7 @@ class LabelService extends Service {
 
     reject = (ctx) => {
         const params = ctx.request.body;
-        return Label.reject(params, params.user).then(() => {
+        return Label.reject(params, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
