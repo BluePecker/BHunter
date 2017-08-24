@@ -44,11 +44,6 @@ Schema.index({
     name: 'unique'
 });
 
-/**
- * @typedef {{find:function}} Schema
- * @type {{create: (function(*)), list: (function()), tree: (function()), adopt: (function(*=, *=)), reject: (function(*=, *=))}}
- */
-
 Schema.statics = {
     // 创建
     create(industry, user) {
@@ -65,7 +60,7 @@ Schema.statics = {
 
     // 列表
     list() {
-        return Schema.find({
+        return this.find({
             'deleted'      : null,
             'review.status': true
         }, 'name parent').then(docs => {
@@ -83,7 +78,7 @@ Schema.statics = {
 
     // 树形
     tree() {
-        return Schema.find({
+        return this.find({
             'deleted'      : null,
             'review.status': true
         }, 'name parent').then(docs => {

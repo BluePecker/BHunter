@@ -89,7 +89,7 @@ Schema.statics = {
 
     // 下属商户
     belongTo(user) {
-        return Schema.find({
+        return this.find({
             'owner'  : user,
             'deleted': null
         }).then(docs => {
