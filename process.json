@@ -2,12 +2,11 @@
     "apps": [
         {
             "name": "service",
-            "script": "babel-node",
-            "args": "app.js",
-            "instance_var": "0",
             "env": {
                 "NODE_ENV": "production"
-            }
+            },
+            "script": "babel-node",
+            "args": "app.js"
         }
     ]
 }
