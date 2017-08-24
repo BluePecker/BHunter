@@ -51,11 +51,11 @@ Schema.index({
 
 Schema.statics = {
     // 创建
-    create(industry) {
+    create(industry, user) {
         return (new this({
             parent : industry.parent || '',
-            name   : industry.name || '',
-            creator: industry.creator || ''
+            creator: user,
+            name   : industry.name || ''
         })).save().then(doc => {
             return doc;
         }).catch(err => {

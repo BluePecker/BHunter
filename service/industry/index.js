@@ -10,7 +10,7 @@ class IndustryService extends Service {
      */
     create = (ctx) => {
         const params = ctx.request.body;
-        return Industry.create(params).then(industry => {
+        return Industry.create(params, ctx.user).then(industry => {
             this.response(Service.SUCCESS, {
                 _id: industry._id
             });
