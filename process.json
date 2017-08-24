@@ -4,6 +4,7 @@
             "name": "service",
             "script": "babel-node",
             "args": "app.js",
+            "instance_var": "INSTANCE_ID",
             "env": {
                 "NODE_ENV": "production"
             }
