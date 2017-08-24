@@ -25,8 +25,9 @@ class LabelService extends Service {
     };
 
     adopt = (ctx) => {
-        const params = ctx.request.body;
-        return Label.adopt(params, ctx.user).then(() => {
+        return Label.adopt({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -34,8 +35,9 @@ class LabelService extends Service {
     };
 
     reject = (ctx) => {
-        const params = ctx.request.body;
-        return Label.reject(params, ctx.user).then(() => {
+        return Label.reject({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);

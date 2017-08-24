@@ -36,8 +36,9 @@ class IndustryService extends Service {
     };
 
     adopt = (ctx) => {
-        const params = ctx.request.body;
-        return Industry.adopt(params, ctx.user).then(() => {
+        return Industry.adopt({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
@@ -45,8 +46,9 @@ class IndustryService extends Service {
     };
 
     reject = (ctx) => {
-        const params = ctx.request.body;
-        return Industry.reject(params, ctx.user).then(() => {
+        return Industry.reject({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
             this.response(Service.FAILURE, err.errmsg);
