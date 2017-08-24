@@ -11,27 +11,27 @@ class IndustryService extends Service {
     create = (ctx) => {
         const params = ctx.request.body;
         return Industry.create(params, ctx.user).then(industry => {
-            this.response(Service.SUCCESS, {
+            this.success({
                 _id: industry._id
             });
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.failure(err.message);
         });
     };
 
     list = () => {
         return Industry.list().then(industry => {
-            this.response(Service.SUCCESS, industry);
+            this.success(industry);
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.failure(err.message);
         });
     };
 
     tree = () => {
         return Industry.tree().then(industry => {
-            this.response(Service.SUCCESS, industry);
+            this.success(industry);
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.failure(err.message);
         });
     };
 
@@ -39,9 +39,9 @@ class IndustryService extends Service {
         return Industry.adopt({
             _id: ctx.params._id
         }, ctx.user).then(() => {
-            this.response(Service.SUCCESS);
+            this.success();
         }).catch(err => {
-            this.response(Service.FAILURE, err.message);
+            this.failure(err.message);
         });
     };
 
@@ -49,9 +49,9 @@ class IndustryService extends Service {
         return Industry.reject({
             _id: ctx.params._id
         }, ctx.user).then(() => {
-            this.response(Service.SUCCESS);
+            this.success();
         }).catch(err => {
-            this.response(Service.FAILURE, err.message);
+            this.failure(err.message);
         });
     };
 }

@@ -8,19 +8,19 @@ class LabelService extends Service {
     create = (ctx) => {
         const params = ctx.request.body;
         return Label.create(params, ctx.user).then(label => {
-            this.response(Service.SUCCESS, {
+            this.success({
                 _id: label._id
             });
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.failure(err.message);
         });
     };
 
     list = () => {
         return Label.list().then(label => {
-            this.response(Service.SUCCESS, label);
+            this.success(label);
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.failure(err.message);
         });
     };
 
@@ -28,9 +28,9 @@ class LabelService extends Service {
         return Label.adopt({
             _id: ctx.params._id
         }, ctx.user).then(() => {
-            this.response(Service.SUCCESS);
+            this.success();
         }).catch(err => {
-            this.response(Service.FAILURE, err.message);
+            this.failure(err.message);
         });
     };
 
@@ -38,9 +38,9 @@ class LabelService extends Service {
         return Label.reject({
             _id: ctx.params._id
         }, ctx.user).then(() => {
-            this.response(Service.SUCCESS);
+            this.success();
         }).catch(err => {
-            this.response(Service.FAILURE, err.message);
+            this.failure(err.message);
         });
     };
 }

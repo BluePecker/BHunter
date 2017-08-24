@@ -8,7 +8,7 @@ class StorageService extends Service {
     /**
      * 对象存储
      * @param ctx
-     * @returns {*|Promise|Promise.<T>}
+     * @returns {*|Promise|Promise.<array>}
      */
     save = (ctx) => {
         const params = ctx.request.body;
@@ -24,7 +24,7 @@ class StorageService extends Service {
                     };
                 }));
             }).catch(err => {
-                this.failure(err.errmsg);
+                this.failure(err.message);
             });
     }
 }
