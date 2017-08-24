@@ -41,7 +41,7 @@ class IndustryService extends Service {
         }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.response(Service.FAILURE, err.message);
         });
     };
 
@@ -51,7 +51,7 @@ class IndustryService extends Service {
         }, ctx.user).then(() => {
             this.response(Service.SUCCESS);
         }).catch(err => {
-            this.response(Service.FAILURE, err.errmsg);
+            this.response(Service.FAILURE, err.message);
         });
     };
 }

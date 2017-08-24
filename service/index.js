@@ -59,7 +59,7 @@ class Service extends ResponseCode {
         this.ctx.body = {
             code   : code,
             data   : (Array.isArray(data) ? {list: data} : data) || {},
-            message: message || 'winner winner,chicken dinner.'
+            message: message
         };
     }
 

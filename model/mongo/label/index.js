@@ -86,6 +86,11 @@ Schema.statics = {
                     user     : user
                 }
             }
+        }).then(doc => {
+            if (!doc) {
+                throw new Error('the data does not exist.');
+            }
+            return doc;
         }).catch(err => {
             return bluebird.reject(err);
         });
@@ -101,6 +106,11 @@ Schema.statics = {
                     user     : user
                 }
             }
+        }).then(doc => {
+            if (!doc) {
+                throw new Error('the data does not exist.');
+            }
+            return doc;
         }).catch(err => {
             return bluebird.reject(err);
         });
