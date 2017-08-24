@@ -1,6 +1,7 @@
 /**
  * Created by shuc on 17/8/17.
  */
+import bluebird from 'bluebird';
 import mongoose from '../index';
 
 const Schema = new mongoose.Schema({
@@ -72,7 +73,22 @@ const Schema = new mongoose.Schema({
 });
 
 Schema.statics = {
+    // 创建
+    create(merchant, user) {
+        return (new Schema({
+            type       : merchant.type,
+            creator    : user,
+            owner      : user,
+            information: merchant.information
+        })).save().then(doc => {
+            return doc;
+        }).catch(err => {
+            bluebird.reject(err);
+        });
+    },
 
+    list() {
+    }
 };
 
 export default mongoose.model('merchant', Schema);
