@@ -77,7 +77,7 @@ const Schema = new mongoose.Schema({
         _id: mongoose.Schema.Types.ObjectId
     },
     // 行业
-    business: {
+    industry: {
         _id: mongoose.Schema.Types.ObjectId
     },
     // 商户
