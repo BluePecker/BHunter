@@ -75,7 +75,7 @@ const Schema = new mongoose.Schema({
 Schema.statics = {
     // 创建
     create(merchant, user) {
-        return (new Schema({
+        return (new this({
             type       : merchant.type,
             creator    : user,
             owner      : user,
