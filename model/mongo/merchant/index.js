@@ -87,7 +87,64 @@ Schema.statics = {
         });
     },
 
-    list() {
+    // 下属商户
+    belongTo(user) {
+        return Schema.find({
+            'owner'  : user,
+            'deleted': null
+        }).then(docs => {
+            return docs;
+        }).catch(err => {
+            bluebird.reject(err);
+        });
+    },
+
+    // 通过
+    adopt(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : true,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 驳回
+    reject(id, user) {
+        return this.findByIdAndUpdate(id, {
+            $set: {
+                review: {
+                    status   : false,
+                    timestamp: new Date,
+                    user     : user
+                }
+            }
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
+    // 编辑
+    edit(merchant, user) {
+        return this.findByIdAndUpdate(merchant._id, {
+            $set: {
+                review     : {
+                    status   : false,
+                    timestamp: new Date,
+                    user     : user
+                },
+                type       : merchant.type,
+                information: merchant.information
+            }
+        }).catch(err => {
+            bluebird.reject(err);
+        });
+
     }
 };
 
