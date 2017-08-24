@@ -5,8 +5,8 @@ import Router from '../router';
 
 const V1 = new Router('industry', {
     patch: {
-        '/adopt' : 'adopt',
-        '/reject': 'reject'
+        '/adopt/:_id' : 'adopt',
+        '/reject/:_id': 'reject'
     },
     get  : {
         '/list': 'list',
