@@ -88,11 +88,11 @@ Schema.statics = {
     },
 
     // 下属商户
-    belongTo(user) {
+    own(user) {
         return this.find({
             'owner'  : user,
             'deleted': null
-        }).then(docs => {
+        }, 'review type information').then(docs => {
             return docs;
         }).catch(err => {
             bluebird.reject(err);

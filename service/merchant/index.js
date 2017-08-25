@@ -15,6 +15,39 @@ class MerchantService extends Service {
             this.failure(err.message);
         });
     };
+
+    edit = (ctx) => {
+        ctx.request.body._id = ctx.params._id;
+        return Merchant.edit(ctx.request.body, ctx.user).then(() => {
+            this.success();
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
+    adopt = (ctx) => {
+        return Merchant.adopt(ctx.params._id, ctx.user).then(() => {
+            this.success();
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
+    reject = (ctx) => {
+        return Merchant.reject(ctx.params._id, ctx.user).then(() => {
+            this.success();
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
+    own = (ctx) => {
+        return Merchant.own(ctx.user).then(docs => {
+            this.success(docs);
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
 }
 
 export default new MerchantService();

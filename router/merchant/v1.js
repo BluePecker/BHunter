@@ -4,8 +4,16 @@
 import Router from '../router';
 
 const V1 = new Router('merchant', {
-    post: {
+    patch: {
+        '/edit/:_id'  : 'edit',
+        '/reject/:_id': 'reject',
+        '/adopt/:_id' : 'adopt'
+    },
+    post : {
         '/create': 'create'
+    },
+    get  : {
+        '/own': 'own'
     }
 });
 
