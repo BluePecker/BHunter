@@ -83,7 +83,7 @@ Schema.statics = {
         })).save().then(doc => {
             return doc;
         }).catch(err => {
-            bluebird.reject(err);
+            return bluebird.reject(err);
         });
     },
 
@@ -95,7 +95,7 @@ Schema.statics = {
         }, 'review type information').then(docs => {
             return docs;
         }).catch(err => {
-            bluebird.reject(err);
+            return bluebird.reject(err);
         });
     },
 
@@ -157,7 +157,7 @@ Schema.statics = {
             }
             return doc;
         }).catch(err => {
-            bluebird.reject(err);
+            return bluebird.reject(err);
         });
 
     }
