@@ -99,9 +99,11 @@ Schema.statics = {
     // 详情
     detail(id){
         return this.findOne({
-            '_id'          : id,
-            'deleted'      : null,
-            'review.status': true
+            _id    : id,
+            deleted: null,
+            review : {
+                status: true
+            }
         }).then(task => {
             return task;
         }).catch(err => {

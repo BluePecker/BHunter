@@ -61,8 +61,10 @@ Schema.statics = {
     // 标签列表
     list() {
         return this.find({
-            'deleted'      : null,
-            'review.status': true
+            deleted: null,
+            review : {
+                status: true
+            }
         }, 'name parent').then(docs => {
             return docs.map(item => {
                 return {

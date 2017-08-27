@@ -61,8 +61,10 @@ Schema.statics = {
     // 列表
     list() {
         return this.find({
-            'deleted'      : null,
-            'review.status': true
+            deleted: null,
+            review : {
+                status: true
+            }
         }, 'name parent').then(docs => {
             return docs.map(item => {
                 return {
@@ -79,8 +81,10 @@ Schema.statics = {
     // 树形
     tree() {
         return this.find({
-            'deleted'      : null,
-            'review.status': true
+            deleted: null,
+            review : {
+                status: true
+            }
         }, 'name parent').then(docs => {
             return JSON.parse(JSON.stringify(docs));
         }).then(docs => {
