@@ -90,11 +90,16 @@ Schema.statics = {
     // 下属商户
     own(user) {
         return this.find({
-            owner  : user,
-            deleted: null
-        }).then(docs => {
-            console.log(docs);
-            return docs;
+            'owner._id': user._id,
+            'deleted'  : null
+        }, 'type review information').then(docs => {
+            return docs.map(item => {
+                return {
+                    type       : item.type,
+                    review     : item.review,
+                    information: item.information
+                };
+            });
         }).catch(err => {
             return bluebird.reject(err);
         });
