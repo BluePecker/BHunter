@@ -90,8 +90,8 @@ Schema.statics = {
     // 下属商户
     own(user) {
         return this.find({
-            'owner._id': user._id,
-            'deleted'  : null
+            'owner'  : user,
+            'deleted': null
         }, 'type review information').then(docs => {
             return docs.map(item => {
                 return {

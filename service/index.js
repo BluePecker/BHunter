@@ -1,6 +1,8 @@
 /**
  * Created by shuc on 17/8/8.
  */
+import mongoose from 'mongoose';
+
 class ResponseCode {
     static SUCCESS = 200;
     static FAILURE = 400;
@@ -40,7 +42,7 @@ class Service extends ResponseCode {
     auth() {
         const header = this.ctx.headers;
         this.ctx.user = {
-            _id: header['json-web-token']
+            _id: mongoose.Types.ObjectId(header['json-web-token'])
         };
         return header['json-web-token'] ? true : false;
     }
