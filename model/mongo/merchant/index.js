@@ -92,7 +92,7 @@ Schema.statics = {
         return this.find({
             owner  : user,
             deleted: null
-        }, 'review type information').then(docs => {
+        }).then(docs => {
             console.log(docs);
             return docs;
         }).catch(err => {
