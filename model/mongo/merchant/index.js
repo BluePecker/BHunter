@@ -89,6 +89,10 @@ Schema.statics = {
 
     // 下属商户
     own(user) {
+        console.log({
+            'owner'  : user,
+            'deleted': null
+        });
         return this.find({
             'owner'  : user,
             'deleted': null
