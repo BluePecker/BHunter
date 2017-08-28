@@ -31,12 +31,13 @@
         },
         "redis": {
             "protocol": "redis",
-            "port": 6379,
+            "port": 6378,
             "database": "0",
             "host": "192.168.99.100",
             "options": {
                 "keepAlive": 10,
-                "connectTimeout": 10000
+                "connectTimeout": 10000,
+                "retries": 5
             }
         }
     },
