@@ -30,11 +30,13 @@
             "database": "hunter"
         },
         "redis": {
-            "host": "192.168.99.100",
+            "protocol": "redis",
             "port": 6379,
+            "database": "0",
+            "host": "192.168.99.100",
             "options": {
-                "connectTimeout": 10000,
-                "keepAlive": 10
+                "keepAlive": 10,
+                "connectTimeout": 10000
             }
         }
     },
