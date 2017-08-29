@@ -7,6 +7,11 @@ import {redis, Cache} from '../index';
 import Industry from '../../mongo/industry';
 
 class IndustryCache extends Cache {
+
+    clearTreeCache() {
+        redis.del(this.key('tree'));
+    }
+
     tree() {
         const key = this.key('tree');
         return redis.get(key).then(cache => {

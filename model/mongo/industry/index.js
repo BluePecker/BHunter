@@ -4,6 +4,7 @@
 import JSON from 'JSON';
 import bluebird from 'bluebird';
 import mongoose from '../index';
+import IndustryCache from '../../redis/industry';
 
 /**
  * The complete bluebird, or one or more components of the bluebird.
@@ -40,8 +41,21 @@ const Schema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-Schema.index({
-    name: 'unique'
+Schema.index({name: 'unique'});
+
+[
+    'insertMany',
+    'updateMany',
+    'update',
+    'remove',
+    'save',
+    'updateOne',
+    'findOneAndRemove',
+    'findOneAndUpdate'
+].forEach(item => {
+    Schema.post(item, () => {
+        IndustryCache.clearTreeCache();
+    });
 });
 
 Schema.statics = {
