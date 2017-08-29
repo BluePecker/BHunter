@@ -58,24 +58,6 @@ Schema.statics = {
         });
     },
 
-    // 列表
-    list() {
-        return this.find({
-            'deleted'      : null,
-            'review.status': true
-        }, 'name parent').then(docs => {
-            return docs.map(item => {
-                return {
-                    _id   : item._id,
-                    name  : item.name,
-                    parent: item.parent
-                };
-            });
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
     // 树形
     tree() {
         return this.find({

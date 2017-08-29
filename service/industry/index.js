@@ -6,23 +6,13 @@ import IndustryCache from '../../model/redis/industry';
 import Industry from '../../model/mongo/industry';
 
 class IndustryService extends Service {
-    /**
-     * @typedef {{errmsg: string}} err
-     */
+
     create = (ctx) => {
         const params = ctx.request.body;
         return Industry.create(params, ctx.user).then(industry => {
             this.success({
                 _id: industry._id
             });
-        }).catch(err => {
-            this.failure(err.message);
-        });
-    };
-
-    list = () => {
-        return Industry.list().then(industry => {
-            this.success(industry);
         }).catch(err => {
             this.failure(err.message);
         });

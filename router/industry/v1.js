@@ -9,7 +9,6 @@ const V1 = new Router('industry', {
         '/reject/:_id': 'reject'
     },
     get  : {
-        '/list': 'list',
         '/tree': 'tree'
     },
     post : {
