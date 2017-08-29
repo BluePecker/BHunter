@@ -2,6 +2,7 @@
  * Created by shuc on 17/8/17.
  */
 import Service from '../index';
+import IndustryCache from '../../model/redis/industry';
 import Industry from '../../model/mongo/industry';
 
 class IndustryService extends Service {
@@ -28,7 +29,7 @@ class IndustryService extends Service {
     };
 
     tree = () => {
-        return Industry.tree().then(industry => {
+        return IndustryCache.tree().then(industry => {
             this.success(industry);
         }).catch(err => {
             this.failure(err.message);

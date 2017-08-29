@@ -4,6 +4,7 @@
 import Config from 'config';
 import Redis from 'ioredis';
 import Log4js from 'log4js';
+import Md5 from 'md5';
 import Builder from 'parse-dburi';
 
 const logger = Log4js.getLogger('koa');
@@ -31,4 +32,10 @@ redis.on('error', (err) => {
     logger.info(`REDIS: Unable to connected for err -> ${err}`);
 });
 
-export default redis;
+class Cache {
+    key(key) {
+        return Md5(`${this.constructor.name}#${key}`);
+    }
+}
+
+export {redis, Cache};
