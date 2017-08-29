@@ -10,9 +10,9 @@ class IndustryCache extends Cache {
     tree() {
         const key = this.key('tree');
         return redis.get(key).then(cache => {
-            return cache ? JSON.parse(cache) : {};
+            return cache ? JSON.parse(cache) : [];
         }).then(cache => {
-            return !Object.keys(cache).length ? Industry.tree().then(tree => {
+            return cache.length ? Industry.tree().then(tree => {
                 redis.set(key, JSON.stringify(tree));
                 return tree;
             }) : cache;
