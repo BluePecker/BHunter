@@ -12,10 +12,13 @@ class IndustryCache extends Cache {
         return redis.get(key).then(cache => {
             return cache ? JSON.parse(cache) : [];
         }).then(cache => {
-            return !cache.length ? Industry.tree().then(tree => {
-                redis.set(key, JSON.stringify(tree));
+            if (cache.length) {
+                return cache;
+            }
+            return Industry.tree().then(tree => {
+                redis.set(key, JSON.stringify(tree), 'EX', 60);
                 return tree;
-            }) : cache;
+            });
         }).catch(err => {
             return bluebird.reject(err);
         });
