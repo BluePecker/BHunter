@@ -25,10 +25,10 @@ const Schema = new mongoose.Schema({
     // 删除时间
     deleted: {type: Date, default: null},
     // 行业名
-    name   : {type: String, unique: true},
+    name   : {type: String, unique: true, required: true},
     // 创建者
     creator: {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {type: mongoose.Schema.Types.ObjectId, required: true}
     },
     // 所属父行业
     parent : {
@@ -57,6 +57,4 @@ const Schema = new mongoose.Schema({
 
 Schema.statics = statics;
 
-const Industry = mongoose.model('industry', Schema);
-
-export default Industry;
+export default mongoose.model('industry', Schema);

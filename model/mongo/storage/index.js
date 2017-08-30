@@ -9,7 +9,7 @@ const Schema = new mongoose.Schema({
     deleted: {type: Date, default: null},
     // 创建者
     creator: {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {type: mongoose.Schema.Types.ObjectId, required: true}
     },
     // 数据保存地址
     address: {

@@ -90,15 +90,4 @@ const Schema = new mongoose.Schema({
 
 Schema.statics = statics;
 
-const Task = mongoose.model('task', Schema);
-
-Task.schema.path('labels').validate(val => {
-    return val.every(item => {
-        return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(item);
-    });
-}, '标签必填字段');
-Task.schema.path('contact').validate(val => {
-    return !val || /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(val);
-}, '联系方式格式错误');
-
-export default Task;
+export default mongoose.model('task', Schema);

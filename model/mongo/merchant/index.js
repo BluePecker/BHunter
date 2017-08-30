@@ -1,6 +1,10 @@
 /**
  * Created by shuc on 17/8/17.
  */
+/**
+ * @typedef {{$matches:function,$isURL:function,$isMobilePhone:function}} validator
+ */
+import validator from 'node-mongoose-validator';
 import mongoose from '../index';
 import statics from './static';
 
@@ -13,17 +17,29 @@ const Schema = new mongoose.Schema({
         },
         timestamp: Date
     },
-    // 类型 0: 企业 1: 个人
-    type       : {type: Number, default: 0},
+    type       : {
+        type    : String,
+        default : '企业',
+        validate: validator.$matches('(企业)|(个人)', 'ig')
+    },
     // 删除时间
-    deleted    : {type: Date, default: null},
+    deleted    : {
+        type   : Date,
+        default: null
+    },
     // 创建者
     creator    : {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     },
     // 拥有者
     owner      : {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     },
     // 商户资料
     information: {
@@ -34,9 +50,16 @@ const Schema = new mongoose.Schema({
         // 公司地址
         address : String,
         // 手机号
-        phone   : String,
+        phone   : {
+            type    : String,
+            required: true,
+            validate: validator.$isMobilePhone('zh-CN')
+        },
         // 网址
-        website : String,
+        website : {
+            type    : String,
+            validate: validator.$isURL()
+        },
         picture : {
             // 真人照片
             live  : {
