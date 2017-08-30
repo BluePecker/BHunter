@@ -38,9 +38,7 @@ const Schema = new mongoose.Schema({
 }, {
     versionKey: false,
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
-});
-
-Schema.index({name: 'unique'});
+}).index({name: 'unique'});
 
 [
     'insertMany',

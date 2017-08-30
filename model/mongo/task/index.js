@@ -83,10 +83,7 @@ const Schema = new mongoose.Schema({
 }, {
     versionKey: false,
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
-});
-
-// 添加索引
-Schema.index({
+}).index({
     // 位置索引
     location: "2dsphere"
 });
