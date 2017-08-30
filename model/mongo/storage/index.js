@@ -1,8 +1,8 @@
 /**
  * Created by shuc on 17/8/18.
  */
-import bluebird from 'bluebird';
 import mongoose from '../index';
+import statics from './static';
 
 const Schema = new mongoose.Schema({
     // 删除时间
@@ -23,40 +23,6 @@ const Schema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
-Schema.statics = {
-    // 批量写入数据
-    addBatch(arr, user) {
-        return this.insertMany(arr.map(item => {
-            item.creator = user;
-            return item;
-        })).then(docs => {
-            return docs;
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
-    // 获取存储路径
-    getAddrByIds(id) {
-        const schema = this;
-        return schema.find({
-            deleted: null,
-            _id    : {
-                $in: Array.isArray(id) ? id : [id]
-            }
-        }).then(docs => {
-            docs.__proto__.toObject = () => {
-                var container = {};
-                docs.forEach(item => {
-                    container[item._id] = item;
-                });
-                return container;
-            };
-            return docs;
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    }
-};
+Schema.statics = statics;
 
 export default mongoose.model('storage', Schema);

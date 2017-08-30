@@ -1,13 +1,9 @@
 /**
  * Created by shuc on 17/8/1.
  */
-import bluebird from 'bluebird';
 import mongoose from '../index';
-/**
- * The complete bluebird, or one or more components of the bluebird.
- * @typedef {object} bluebird
- * @property {function} reject - Indicates whether the Courage component is reject.
- */
+import statics from './static';
+
 const Schema = new mongoose.Schema({
     // 描述
     describe: String,
@@ -95,60 +91,7 @@ Schema.index({
     location: "2dsphere"
 });
 
-Schema.statics = {
-    // 详情
-    detail(id){
-        return this.findOne({
-            '_id'          : id,
-            'review.status': true,
-            'deleted'      : null
-        }).then(task => {
-            return task;
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
-    // 通过
-    adopt(id, user) {
-        return this.findByIdAndUpdate(id, {
-            $set: {
-                review: {
-                    timestamp: new Date,
-                    status   : true,
-                    user     : user
-                }
-            }
-        }).then(doc => {
-            if (!doc) {
-                throw new Error('the data does not exist.');
-            }
-            return doc;
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
-    // 驳回
-    reject(id, user) {
-        return this.findByIdAndUpdate(id, {
-            $set: {
-                review: {
-                    timestamp: new Date,
-                    status   : false,
-                    user     : user
-                }
-            }
-        }).then(doc => {
-            if (!doc) {
-                throw new Error('the data does not exist.');
-            }
-            return doc;
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    }
-};
+Schema.statics = statics;
 
 const Task = mongoose.model('task', Schema);
 

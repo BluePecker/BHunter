@@ -1,8 +1,8 @@
 /**
  * Created by shuc on 17/8/17.
  */
-import statics from './static';
 import mongoose from '../index';
+import statics from './static';
 import IndustryCache from '../../redis/industry';
 
 /**
