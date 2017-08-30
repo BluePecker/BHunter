@@ -38,7 +38,8 @@ Schema.statics = {
 
     // 获取存储路径
     getAddrByIds(id) {
-        return this.findAll({
+        const schema = this;
+        return schema.find({
             deleted: null,
             _id    : {
                 $in: Array.isArray(id) ? id : [id]

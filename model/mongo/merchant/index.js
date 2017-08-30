@@ -89,7 +89,8 @@ Schema.statics = {
 
     // 下属商户
     own(user) {
-        return this.find({
+        const schema = this;
+        return schema.find({
             owner  : user,
             deleted: null
         }, 'type review information').then(docs => {
