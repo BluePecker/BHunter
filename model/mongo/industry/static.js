@@ -26,11 +26,13 @@ const Statics = {
     // 编辑
     edit(id, industry, user) {
         return this.findByIdAndUpdate(id, {
-            $set: {
+            $set  : {
                 name  : industry.name,
-                review: null,
                 editor: user,
                 parent: industry.parent
+            },
+            $unset: {
+                review: true
             }
         }).then(doc => {
             if (!doc) {

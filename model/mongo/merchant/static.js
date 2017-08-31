@@ -80,11 +80,13 @@ const Statics = {
     // 编辑
     edit(merchant, user) {
         return this.findByIdAndUpdate(merchant._id, {
-            $set: {
-                review     : null,
+            $set  : {
                 type       : merchant.type,
                 editor     : user,
                 information: merchant.information
+            },
+            $unset: {
+                review: true
             }
         }).then(doc => {
             if (!doc) {
