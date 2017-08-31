@@ -3,7 +3,7 @@
  */
 import Router from '../router';
 
-const V1 = new Router('task', {
+const V1 = new Router('reward', {
     post: {
         '/create': 'create',
         '/detail': 'detail'

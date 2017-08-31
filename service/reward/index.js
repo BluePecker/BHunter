@@ -3,11 +3,11 @@
  */
 import Service from '../index';
 // import User from '../../model/mysql/user';
-import Task from '../../model/mongo/task';
+import Reward from '../../model/mongo/reward';
 
 class TaskService extends Service {
     create = (ctx) => {
-        return (new Task(ctx.request.body)).save().then(doc => {
+        return (new Reward(ctx.request.body)).save().then(doc => {
             this.response(Service.SUCCESS, {
                 _id: doc._id
             });
@@ -24,7 +24,7 @@ class TaskService extends Service {
     };
 
     detail = (ctx) => {
-        return Task.detail(ctx.request.body).then(doc => {
+        return Reward.detail(ctx.request.body).then(doc => {
             return doc;
         }).then(doc => {
             this.response(Service.SUCCESS, doc);

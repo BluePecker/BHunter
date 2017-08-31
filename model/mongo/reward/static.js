@@ -4,15 +4,39 @@
 import bluebird from 'bluebird';
 
 const Statics = {
+    create(reward, user) {
+        return (new this({
+            describe: reward.describe,
+            headline: reward.headline,
+            contact : reward.contact,
+            tactics : reward.tactics,
+            detail  : reward.detail,
+            annex   : reward.annex,
+            deadline: reward.deadline,
+            location: reward.location,
+            creator : user,
+            industry: reward.industry,
+            merchant: reward.merchant
+        })).save().then(reward => {
+            "use strict";
+            return reward;
+        }).catch(err => {
+            "use strict";
+            return bluebird.reject(err);
+        });
+    },
+
     // 详情
     detail(id){
         return this.findOne({
             '_id'          : id,
             'review.status': true,
             'deleted'      : null
-        }).then(task => {
-            return task;
+        }).then(reward => {
+            "use strict";
+            return reward;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -28,11 +52,13 @@ const Statics = {
                 }
             }
         }).then(doc => {
+            "use strict";
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
             return doc;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -48,11 +74,13 @@ const Statics = {
                 }
             }
         }).then(doc => {
+            "use strict";
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
             return doc;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     }

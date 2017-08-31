@@ -1,16 +1,26 @@
 /**
  * Created by shuc on 17/8/1.
  */
+import validator from 'node-mongoose-validator';
 import mongoose from '../index';
 import statics from './static';
 
 const Schema = new mongoose.Schema({
     // 描述
-    describe: String,
+    describe: {
+        type    : String,
+        required: true
+    },
     // 标题
-    headline: String,
+    headline: {
+        type    : String,
+        required: true
+    },
     // 联系方式
-    contact : String,
+    contact : {
+        type    : String,
+        required: true
+    },
     // 审核
     review  : {
         // 审核人
@@ -24,8 +34,12 @@ const Schema = new mongoose.Schema({
     },
     // 策略
     tactics : {
-        // 领赏方案(c1: 固定金额, c2: 提成比例*成单价)
-        case     : String,
+        // 领赏方案
+        case     : {
+            type    : String,
+            default : '固定金额',
+            validate: validator.$matches('(固定金额)|(固定比例)', 'ig')
+        },
         // 限额
         quota    : Number,
         // 可供支付金钱(元)
@@ -44,8 +58,6 @@ const Schema = new mongoose.Schema({
             suggest  : Number
         }
     },
-    // 标签
-    labels  : [String],
     // 详情
     detail  : String,
     // 附件
@@ -56,7 +68,10 @@ const Schema = new mongoose.Schema({
         _id     : mongoose.Schema.Types.ObjectId
     }],
     // 删除时间
-    deleted : {type: Date, default: null},
+    deleted : {
+        type   : Date,
+        default: null
+    },
     // 截止日期
     deadline: {
         type: Date
@@ -64,21 +79,42 @@ const Schema = new mongoose.Schema({
     // 位置
     location: {
         // 类型
-        type       : {type: String, default: 'Point'},
+        type       : {
+            type   : String,
+            default: 'Point'
+        },
         // 经纬度
-        coordinates: {type: [Number]}
+        coordinates: {
+            type    : [Number],
+            required: true
+        }
     },
     // 发布者
     creator : {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
+    },
+    // 编辑者
+    editor  : {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId
+        }
     },
     // 行业
     industry: {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     },
     // 商户
     merchant: {
-        _id: mongoose.Schema.Types.ObjectId
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     }
 }, {
     versionKey: false,
@@ -90,4 +126,4 @@ const Schema = new mongoose.Schema({
 
 Schema.statics = statics;
 
-export default mongoose.model('task', Schema);
+export default mongoose.model('reward', Schema);
