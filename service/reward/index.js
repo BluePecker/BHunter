@@ -101,6 +101,7 @@ class RewardService extends Service {
                 return reward;
             });
         }).then(reward => {
+            delete reward.deleted;
             delete reward.review;
             this.response(Service.SUCCESS, reward);
         }).catch(err => {
