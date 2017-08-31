@@ -28,6 +28,10 @@ class StorageService extends Service {
             });
     }
 
+    auth() {
+        return true;
+    }
+
     view(ctx) {
         return Storage.findById(ctx.params._id).then(object => {
             if (!object) {
