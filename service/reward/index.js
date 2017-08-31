@@ -1,6 +1,7 @@
 /**
  * Created by shuc on 17/8/6.
  */
+import mongoose from 'mongoose';
 import JSON from 'JSON';
 import Promise from 'bluebird';
 import Service from '../index';
@@ -8,6 +9,7 @@ import Service from '../index';
 import Reward from '../../model/mongo/reward';
 import Merchant from '../../model/mongo/merchant';
 import Industry from '../../model/mongo/industry';
+import Storage from '../../model/mongo/storage';
 
 class RewardService extends Service {
     create = (ctx) => {
@@ -89,6 +91,18 @@ class RewardService extends Service {
                 return reward;
             });
         }).then(reward => {
+            return Storage.getAddrByIds(reward.annex.map(item => {
+                return mongoose.Types.ObjectId(item);
+            })).then(map => {
+                reward.annex = reward.annex.map(item => {
+                    const object = map[item._id];
+                    item.address = object ? object.address : {};
+                    return item;
+                });
+                return reward;
+            });
+        }).then(reward => {
+            delete reward.review;
             this.response(Service.SUCCESS, reward);
         }).catch(err => {
             this.response(Service.FAILURE, err.message);
