@@ -6,6 +6,9 @@ import Router from '../router';
 const V1 = new Router('storage', {
     post: {
         '/save': 'save'
+    },
+    get : {
+        '/view/:_id': 'view'
     }
 });
 

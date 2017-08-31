@@ -10,7 +10,7 @@ class StorageService extends Service {
      * @param ctx
      * @returns {*|Promise|Promise.<array>}
      */
-    save = (ctx) => {
+    save(ctx) {
         const params = ctx.request.body;
         return Storage.addBatch(params, ctx.user)
             .then(objects => {
@@ -26,6 +26,17 @@ class StorageService extends Service {
             }).catch(err => {
                 this.failure(err.message);
             });
+    }
+
+    view(ctx) {
+        return Storage.findById(ctx.params._id).then(object => {
+            if (!object) {
+                throw new Error('object not exists.');
+            }
+            ctx.redirect(object.address.route);
+        }).catch(err => {
+            ctx.throw(err.message, 404);
+        });
     }
 }
 
