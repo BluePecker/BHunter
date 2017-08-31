@@ -58,7 +58,7 @@ class RewardService extends Service {
         }).then(reward => {
             return Merchant.findOne({
                 _id: reward.merchant
-            }).then(merchant => {
+            }, 'information type review').then(merchant => {
                 if (!merchant) {
                     throw new Error('merchant has been removed.');
                 }
@@ -74,7 +74,7 @@ class RewardService extends Service {
             });
         }).then(reward => {
             return Industry.findOne({
-                _id: reward.merchant
+                _id: reward.industry
             }, 'name review').then(industry => {
                 if (!industry) {
                     throw new Error('industry has been removed.');
