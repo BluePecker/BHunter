@@ -25,6 +25,7 @@ const Statics = {
                 $in: Array.isArray(id) ? id : [id]
             }
         }).then(docs => {
+            console.log('debug: ', id, docs);
             docs.__proto__.toObject = () => {
                 var container = {};
                 docs.forEach(item => {

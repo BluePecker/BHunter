@@ -6,17 +6,29 @@ import statics from './static';
 
 const Schema = new mongoose.Schema({
     // 删除时间
-    deleted: {type: Date, default: null},
+    deleted: {
+        type   : Date,
+        default: null
+    },
     // 创建者
     creator: {
-        _id: {type: mongoose.Schema.Types.ObjectId, required: true}
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     },
     // 数据保存地址
     address: {
         // 路径
-        route   : String,
+        route   : {
+            type    : String,
+            required: true
+        },
         // 数据储存位置
-        location: {type: String, default: 'qiniu'}
+        location: {
+            type   : String,
+            default: 'qiniu'
+        }
     }
 }, {
     versionKey: false,
