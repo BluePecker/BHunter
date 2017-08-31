@@ -92,7 +92,7 @@ class RewardService extends Service {
             });
         }).then(reward => {
             return Storage.getAddrByIds(reward.annex.map(item => {
-                return item._id;
+                return mongoose.Types.ObjectId(item._id);
             })).then(map => {
                 reward.annex = reward.annex.map(item => {
                     const object = map[item._id];
