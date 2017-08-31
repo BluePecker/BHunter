@@ -19,7 +19,7 @@ class IndustryService extends Service {
 
     edit = (ctx) => {
         const params = ctx.request.body;
-        return Industry.adopt({
+        return Industry.edit({
             _id: ctx.params._id
         }, {
             name  : params.name,
