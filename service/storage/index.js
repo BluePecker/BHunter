@@ -29,7 +29,11 @@ class StorageService extends Service {
     }
 
     auth() {
-        return true;
+        const pass = '/v1/storage/view/';
+        if (this.ctx.path.match(pass)) {
+            return true;
+        }
+        return super.auth();
     }
 
     view(ctx) {
@@ -38,8 +42,8 @@ class StorageService extends Service {
                 throw new Error('object not exists.');
             }
             ctx.redirect(object.address.route);
-        }).catch(err => {
-            ctx.throw(err.message, 404);
+        }).catch(() => {
+            ctx.throw(404);
         });
     }
 }
