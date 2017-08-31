@@ -93,9 +93,8 @@ class RewardService extends Service {
             return Storage.getAddrByIds(reward.annex.map(item => {
                 return item._id;
             })).then(map => {
-                console.log(map);
                 reward.annex = reward.annex.map(item => {
-                    const object = map[item._id];
+                    const object = map.toObject()[item._id];
                     item.address = object ? object.address : {};
                     return item;
                 });
