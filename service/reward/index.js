@@ -58,15 +58,34 @@ class RewardService extends Service {
         }).then(reward => {
             return Merchant.findOne({
                 _id: reward.merchant
-            }, 'name review').then(merchant => {
+            }).then(merchant => {
                 if (!merchant) {
                     throw new Error('merchant has been removed.');
                 }
                 if (!merchant.review || !merchant.review.status) {
                     throw new Error('merchant has not been reviewed.');
                 }
-                reward.merchant.name = merchant.name;
-                console.log('debug: ', merchant, reward);
+                reward.merchant = {
+                    _id        : merchant._id,
+                    type       : merchant.type,
+                    information: merchant.information
+                };
+                return reward;
+            });
+        }).then(reward => {
+            return Industry.findOne({
+                _id: reward.merchant
+            }, 'name review').then(industry => {
+                if (!industry) {
+                    throw new Error('industry has been removed.');
+                }
+                if (!industry.review || !industry.review.status) {
+                    throw new Error('industry has not been reviewed.');
+                }
+                reward.industry = {
+                    _id : industry._id,
+                    name: industry.name
+                };
                 return reward;
             });
         }).then(reward => {
