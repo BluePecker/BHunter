@@ -66,6 +66,7 @@ class RewardService extends Service {
                     throw new Error('merchant has not been reviewed.');
                 }
                 reward.merchant.name = merchant.name;
+                console.log('debug: ', merchant, reward);
                 return reward;
             });
         }).then(reward => {
