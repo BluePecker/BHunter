@@ -11,14 +11,14 @@ class RewardService extends Service {
         return Promise.resolve().then(() => {
             return ctx.request.body;
         }).then(reward => {
-            return Merchant.checkAuditById(reward.merchant).then(audit => {
+            return Merchant.checkAudit(reward.merchant, ctx.user).then(audit => {
                 if (!audit) {
                     throw new Error('merchants have not been reviewed.');
                 }
                 return reward;
             });
         }).then(reward => {
-            return Reward.create(reward);
+            return Reward.create(reward, ctx.user);
         }).then(reward => {
             if (reward._id) {
                 this.success();

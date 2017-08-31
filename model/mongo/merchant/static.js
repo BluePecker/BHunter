@@ -21,8 +21,11 @@ const Statics = {
     },
 
     // 是否经过审核
-    checkAuditById(id) {
-        return this.findById(id).then(merchant => {
+    checkAudit(id, user) {
+        return this.findOne({
+            _id  : id,
+            owner: user
+        }).then(merchant => {
             "use strict";
             if (!merchant || !merchant.review) {
                 return false;
