@@ -29,6 +29,7 @@ class StorageService extends Service {
     }
 
     auth() {
+        console.log(this.ctx.path);
         const pass = '/v1/storage/view/';
         if (this.ctx.path.match(pass)) {
             return true;
