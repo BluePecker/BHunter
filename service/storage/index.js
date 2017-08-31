@@ -12,7 +12,7 @@ class StorageService extends Service {
      * @returns {boolean}
      */
     auth(name) {
-        this.allowMethod = ['view'];
+        this.allowMethod = ['scan'];
         return super.auth(name);
     }
 
@@ -40,7 +40,7 @@ class StorageService extends Service {
     }
 
     /**
-     * 查看存储对象
+     * 浏览存储对象
      * @param ctx
      * @returns {Promise.<>|Promise}
      */
