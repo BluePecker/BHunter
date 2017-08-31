@@ -19,7 +19,15 @@ class StorageCache extends Cache {
             if (cache) {
                 return cache;
             }
-            return storage.findById(id).then(object => {
+            return storage.findOne({
+                _id    : id,
+                deleted: null
+            }, '_id address').then(object => {
+                if (!object) {
+                    throw new Error('object not exists.');
+                }
+                return object;
+            }).then(object => {
                 const json = JSON.stringify(object);
                 redis.set(key, json, 'EX', 15 * 60);
                 return object;
