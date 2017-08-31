@@ -34,6 +34,12 @@ const Schema = new mongoose.Schema({
             required: true
         }
     },
+    // 编辑者
+    editor     : {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId
+        }
+    },
     // 拥有者
     owner      : {
         _id: {

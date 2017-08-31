@@ -82,11 +82,10 @@ const Statics = {
         return this.findByIdAndUpdate(merchant._id, {
             $set: {
                 review     : {
-                    status   : false,
-                    timestamp: new Date,
-                    user     : user
+                    status: false
                 },
                 type       : merchant.type,
+                editor     : user,
                 information: merchant.information
             }
         }).then(doc => {

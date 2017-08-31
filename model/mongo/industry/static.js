@@ -25,15 +25,16 @@ const Statics = {
 
     // 编辑
     edit(id, industry, user) {
-        let update = {
-            'name'         : industry.name,
-            'review.status': false
-        };
-        industry.parent && (update.parent = industry.parent);
-
         return this.findByIdAndUpdate(id, {
-            $set: update
-        }, user).then(doc => {
+            $set: {
+                name  : industry.name,
+                review: {
+                    status: false
+                },
+                editor: user,
+                parent: industry.parent
+            }
+        }).then(doc => {
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
