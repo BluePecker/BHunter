@@ -22,7 +22,7 @@ class Service extends ResponseCode {
                         Reflect.set(target, 'ctx', args[0]);
                         // for auth
                         if (!Reflect.apply(target['auth'], target, [])) {
-                            return this.failure('auth failed');
+                            return this.failure('auth failed.');
                         }
                     }
                     return Reflect.apply(target[name], target, args);
