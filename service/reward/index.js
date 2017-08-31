@@ -52,7 +52,7 @@ class RewardService extends Service {
             if (!reward.review || !reward.review.status) {
                 throw new Error('reward has not been reviewed.');
             }
-            return reward;
+            return JSON.parse(JSON.stringify(reward));
         }).then(reward => {
             return Merchant.findOne({
                 _id: reward.merchant
