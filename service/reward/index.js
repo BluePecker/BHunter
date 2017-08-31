@@ -20,6 +20,7 @@ class RewardService extends Service {
         }).then(reward => {
             return Reward.create(reward);
         }).then(reward => {
+            console.log(reward);
             if (reward._id) {
                 this.success();
             } else {
