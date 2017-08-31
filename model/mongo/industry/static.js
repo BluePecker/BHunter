@@ -1,6 +1,11 @@
 /**
  * Created by shuc on 17/8/30.
  */
+/**
+ * The complete bluebird, or one or more components of the bluebird.
+ * @typedef {object} bluebird
+ * @property {function} reject - Indicates whether the Courage component is reject.
+ */
 import JSON from 'JSON';
 import bluebird from 'bluebird';
 
@@ -40,7 +45,8 @@ const Statics = {
 
     // 树形
     tree() {
-        return this.find({
+        const schema = this;
+        return schema.find({
             'deleted'      : null,
             'review.status': true
         }, 'name parent').then(docs => {

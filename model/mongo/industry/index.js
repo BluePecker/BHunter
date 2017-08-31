@@ -5,11 +5,6 @@ import mongoose from '../index';
 import Hooks from './hooks';
 import statics from './static';
 
-/**
- * The complete bluebird, or one or more components of the bluebird.
- * @typedef {object} bluebird
- * @property {function} reject - Indicates whether the Courage component is reject.
- */
 const Schema = new mongoose.Schema({
     // 审核状态
     review : {
