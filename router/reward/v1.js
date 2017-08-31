@@ -5,7 +5,9 @@ import Router from '../router';
 
 const V1 = new Router('reward', {
     post: {
-        '/create': 'create',
+        '/create': 'create'
+    },
+    get : {
         '/detail': 'detail'
     }
 });
