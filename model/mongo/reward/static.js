@@ -29,9 +29,8 @@ const Statics = {
     // 详情
     detail(id){
         return this.findOne({
-            '_id'          : id,
-            'review.status': true,
-            'deleted'      : null
+            _id    : id,
+            deleted: null
         }).then(reward => {
             "use strict";
             return reward;

@@ -47,10 +47,10 @@ class RewardService extends Service {
     };
 
     detail = (ctx) => {
-        return Reward.detail(ctx.params._id).then(doc => {
-            return doc;
-        }).then(doc => {
-            this.response(Service.SUCCESS, doc);
+        return Reward.detail(ctx.params._id).then(reward => {
+            return reward;
+        }).then(reward => {
+            this.response(Service.SUCCESS, reward);
         }).catch(err => {
             this.response(Service.FAILURE, err.message);
         });
