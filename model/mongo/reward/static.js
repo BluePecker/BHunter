@@ -33,6 +33,9 @@ const Statics = {
             deleted: null
         }).then(reward => {
             "use strict";
+            if (!reward) {
+                throw new Error('the data does not exist.');
+            }
             return reward;
         }).catch(err => {
             "use strict";
@@ -50,12 +53,12 @@ const Statics = {
                     user     : user
                 }
             }
-        }).then(doc => {
+        }).then(reward => {
             "use strict";
-            if (!doc) {
+            if (!reward) {
                 throw new Error('the data does not exist.');
             }
-            return doc;
+            return reward;
         }).catch(err => {
             "use strict";
             return bluebird.reject(err);
@@ -72,12 +75,12 @@ const Statics = {
                     user     : user
                 }
             }
-        }).then(doc => {
+        }).then(reward => {
             "use strict";
-            if (!doc) {
+            if (!reward) {
                 throw new Error('the data does not exist.');
             }
-            return doc;
+            return reward;
         }).catch(err => {
             "use strict";
             return bluebird.reject(err);

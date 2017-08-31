@@ -14,14 +14,14 @@ class RewardService extends Service {
         }).then(reward => {
             return Merchant.checkAudit(reward.merchant, ctx.user).then(audit => {
                 if (!audit) {
-                    throw new Error('merchant have not been reviewed.');
+                    throw new Error('merchant has not been reviewed.');
                 }
                 return reward;
             });
         }).then(reward => {
             return Industry.checkAudit(reward.industry).then(audit => {
                 if (!audit) {
-                    throw new Error('industry have not been reviewed.');
+                    throw new Error('industry has not been reviewed.');
                 }
                 return reward;
             });
@@ -48,7 +48,24 @@ class RewardService extends Service {
 
     detail = (ctx) => {
         return Reward.detail(ctx.params._id).then(reward => {
+            // 判断悬赏是否经过审核
+            if (!reward.review || !reward.review.status) {
+                throw new Error('reward has not been reviewed.');
+            }
             return reward;
+        }).then(reward => {
+            return Merchant.findOne({
+                _id: reward.merchant
+            }, 'name review').then(merchant => {
+                if (!merchant) {
+                    throw new Error('merchant has been removed.');
+                }
+                if (!merchant.review || !merchant.review.status) {
+                    throw new Error('merchant has not been reviewed.');
+                }
+                reward.merchant.name = merchant.name;
+                return reward;
+            });
         }).then(reward => {
             this.response(Service.SUCCESS, reward);
         }).catch(err => {
