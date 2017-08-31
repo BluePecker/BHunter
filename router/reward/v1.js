@@ -8,7 +8,7 @@ const V1 = new Router('reward', {
         '/create': 'create'
     },
     get : {
-        '/detail': 'detail'
+        '/detail/:_id': 'detail'
     }
 });
 
