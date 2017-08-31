@@ -4,11 +4,15 @@
 import Router from '../router';
 
 const V1 = new Router('reward', {
-    post: {
+    post : {
         '/create': 'create'
     },
-    get : {
+    get  : {
         '/detail/:_id': 'detail'
+    },
+    patch: {
+        '/adopt/:_id' : 'adopt',
+        '/reject/:_id': 'reject'
     }
 });
 

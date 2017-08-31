@@ -1,6 +1,8 @@
 /**
  * Created by shuc on 17/8/6.
  */
+import JSON from 'JSON';
+import Promise from 'bluebird';
 import Service from '../index';
 // import User from '../../model/mysql/user';
 import Reward from '../../model/mongo/reward';
@@ -71,7 +73,27 @@ class RewardService extends Service {
         }).catch(err => {
             this.response(Service.FAILURE, err.message);
         });
-    }
+    };
+
+    adopt = (ctx) => {
+        return Reward.adopt({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
+            this.success();
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
+    reject = (ctx) => {
+        return Reward.reject({
+            _id: ctx.params._id
+        }, ctx.user).then(() => {
+            this.success();
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
 }
 
 export default new RewardService();
