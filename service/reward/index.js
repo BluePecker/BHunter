@@ -90,18 +90,6 @@ class RewardService extends Service {
                 return reward;
             });
         }).then(reward => {
-            return Storage.getAddrByIds(reward.annex.map(item => {
-                return item._id;
-            })).then(map => {
-                map = map.toObject();
-                reward.annex = reward.annex.map(item => {
-                    const object = map[item._id];
-                    item.address = object ? object.address : {};
-                    return item;
-                });
-                return reward;
-            });
-        }).then(reward => {
             delete reward.deleted;
             delete reward.review;
             this.response(Service.SUCCESS, reward);
