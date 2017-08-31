@@ -19,9 +19,9 @@ class RewardService extends Service {
                 return reward;
             });
         }).then(reward => {
-            return Industry.checkAudit(reward.industry, ctx.user).then(audit => {
+            return Industry.checkAudit(reward.industry).then(audit => {
                 if (!audit) {
-                    throw new Error('Industry have not been reviewed.');
+                    throw new Error('industry have not been reviewed.');
                 }
                 return reward;
             });

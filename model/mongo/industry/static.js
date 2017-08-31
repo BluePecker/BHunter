@@ -24,10 +24,9 @@ const Statics = {
     },
 
     // 是否经过审核
-    checkAudit(id, user) {
+    checkAudit(id) {
         return this.findOne({
-            _id  : id,
-            owner: user
+            _id: id
         }).then(industry => {
             "use strict";
             if (!industry || !industry.review) {
