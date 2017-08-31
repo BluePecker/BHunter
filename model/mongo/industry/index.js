@@ -2,8 +2,8 @@
  * Created by shuc on 17/8/17.
  */
 import mongoose from '../index';
+import Hooks from './hooks';
 import statics from './static';
-import IndustryCache from '../../redis/industry';
 
 /**
  * The complete bluebird, or one or more components of the bluebird.
@@ -18,17 +18,30 @@ const Schema = new mongoose.Schema({
             _id: mongoose.Schema.Types.ObjectId
         },
         // 状态
-        status   : {type: Boolean, default: false},
+        status   : {
+            type   : Boolean,
+            default: false
+        },
         // 审核时间
         timestamp: Date
     },
     // 删除时间
-    deleted: {type: Date, default: null},
+    deleted: {
+        type   : Date,
+        default: null
+    },
     // 行业名
-    name   : {type: String, unique: true, required: true},
+    name   : {
+        type    : String,
+        unique  : true,
+        required: true
+    },
     // 创建者
     creator: {
-        _id: {type: mongoose.Schema.Types.ObjectId, required: true}
+        _id: {
+            type    : mongoose.Schema.Types.ObjectId,
+            required: true
+        }
     },
     // 所属父行业
     parent : {
@@ -40,21 +53,7 @@ const Schema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 }).index({name: 'unique'});
 
-[
-    'insertMany',
-    'updateMany',
-    'update',
-    'remove',
-    'save',
-    'updateOne',
-    'findOneAndRemove',
-    'findOneAndUpdate'
-].forEach(item => {
-    Schema.post(item, () => {
-        IndustryCache.clearTreeCache();
-    });
-});
-
+new Hooks(Schema);
 Schema.statics = statics;
 
 export default mongoose.model('industry', Schema);
