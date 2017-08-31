@@ -1,7 +1,6 @@
 /**
  * Created by shuc on 17/8/6.
  */
-import mongoose from 'mongoose';
 import JSON from 'JSON';
 import Promise from 'bluebird';
 import Service from '../index';
@@ -92,8 +91,9 @@ class RewardService extends Service {
             });
         }).then(reward => {
             return Storage.getAddrByIds(reward.annex.map(item => {
-                return mongoose.Types.ObjectId(item._id);
+                return item._id;
             })).then(map => {
+                console.log(map);
                 reward.annex = reward.annex.map(item => {
                     const object = map[item._id];
                     item.address = object ? object.address : {};

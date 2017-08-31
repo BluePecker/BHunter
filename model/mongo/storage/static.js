@@ -1,6 +1,7 @@
 /**
  * Created by shuc on 17/8/30.
  */
+import mongoose from 'mongoose';
 import bluebird from 'bluebird';
 
 const Statics = {
@@ -22,7 +23,9 @@ const Statics = {
         return schema.find({
             deleted: null,
             _id    : {
-                $in: Array.isArray(id) ? id : [id]
+                $in: (Array.isArray(id) ? id : [id]).map(item => {
+                    return mongoose.Types.ObjectId(item);
+                })
             }
         }).then(docs => {
             docs.__proto__.toObject = () => {
