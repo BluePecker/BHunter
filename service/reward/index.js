@@ -12,6 +12,7 @@ class RewardService extends Service {
             return ctx.request.body;
         }).then(reward => {
             return Merchant.checkAuditById(reward.merchant).then(audit => {
+                console.log('audit: ', reward);
                 if (!audit) {
                     throw new Error('merchants have not been reviewed.');
                 }
@@ -20,7 +21,7 @@ class RewardService extends Service {
         }).then(reward => {
             return Reward.create(reward);
         }).then(reward => {
-            console.log(reward);
+            console.log('reward: ', reward);
             if (reward._id) {
                 this.success();
             } else {
