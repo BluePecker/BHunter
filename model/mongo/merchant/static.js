@@ -81,9 +81,7 @@ const Statics = {
     edit(merchant, user) {
         return this.findByIdAndUpdate(merchant._id, {
             $set: {
-                review     : {
-                    status: false
-                },
+                review     : null,
                 type       : merchant.type,
                 editor     : user,
                 information: merchant.information

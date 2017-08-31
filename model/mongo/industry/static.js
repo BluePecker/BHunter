@@ -28,9 +28,7 @@ const Statics = {
         return this.findByIdAndUpdate(id, {
             $set: {
                 name  : industry.name,
-                review: {
-                    status: false
-                },
+                review: null,
                 editor: user,
                 parent: industry.parent
             }
