@@ -130,6 +130,8 @@ class Bootstrap {
                 });
             });
         }, 'dir');
+
+        this.app.use(Router.index().routes());
     }
 }
 

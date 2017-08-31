@@ -44,6 +44,18 @@ class Router extends KoaRouter {
         };
         return new Proxy(this, interceptor);
     }
+
+    static index() {
+        const router = new KoaRouter();
+        router.get('/', (ctx) => {
+            ctx.body = {
+                code   : 200,
+                data   : {},
+                message: 'winner winner,chicken dinner.'
+            };
+        });
+        return router;
+    }
 }
 
 export default Router;
