@@ -8,11 +8,24 @@ import Industry from '../../model/mongo/industry';
 class IndustryService extends Service {
 
     create = (ctx) => {
-        const params = ctx.request.body;
-        return Industry.create(params, ctx.user).then(industry => {
+        return Industry.create(ctx.request.body, ctx.user).then(industry => {
             this.success({
                 _id: industry._id
             });
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
+    edit = (ctx) => {
+        const params = ctx.request.body;
+        return Industry.adopt({
+            _id: ctx.params._id
+        }, {
+            name  : params.name,
+            parent: params.parent
+        }, ctx.user).then(() => {
+            this.success();
         }).catch(err => {
             this.failure(err.message);
         });

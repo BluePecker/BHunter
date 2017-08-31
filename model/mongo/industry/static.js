@@ -18,6 +18,18 @@ const Statics = {
         });
     },
 
+    // 编辑
+    edit(id, industry, user) {
+        return this.findByIdAndUpdate(id, industry, user).then(doc => {
+            if (!doc) {
+                throw new Error('the data does not exist.');
+            }
+            return doc;
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
+    },
+
     // 树形
     tree() {
         return this.find({

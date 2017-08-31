@@ -6,6 +6,7 @@ import Router from '../router';
 const V1 = new Router('industry', {
     patch: {
         '/adopt/:_id' : 'adopt',
+        '/edit/:_id'  : 'edit',
         '/reject/:_id': 'reject'
     },
     get  : {
