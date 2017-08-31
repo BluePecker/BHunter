@@ -2,6 +2,7 @@
  * Created by shuc on 17/8/18.
  */
 import mongoose from '../index';
+import Hooks from './hooks';
 import statics from './static';
 
 const Schema = new mongoose.Schema({
