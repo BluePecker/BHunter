@@ -2,7 +2,7 @@
  * Created by shuc on 17/8/18.
  */
 import Service from '../index';
-import Storage from '../../model/mongo/storage';
+import StorageCache from '../../model/redis/storage';
 
 class StorageService extends Service {
     /**
@@ -44,7 +44,7 @@ class StorageService extends Service {
      * @returns {Promise.<>|Promise}
      */
     view(ctx) {
-        return Storage.findById(ctx.params._id).then(object => {
+        return StorageCache.getById(ctx.params._id).then(object => {
             if (!object) {
                 throw new Error('object not exists.');
             }

@@ -4,7 +4,7 @@
 import bluebird from 'bluebird';
 import JSON from 'JSON';
 import {redis, Cache} from '../index';
-import Industry from '../../mongo/industry';
+import industry from '../../mongo/industry';
 
 class IndustryCache extends Cache {
 
@@ -20,8 +20,9 @@ class IndustryCache extends Cache {
             if (cache.length) {
                 return cache;
             }
-            return Industry.tree().then(tree => {
-                redis.set(key, JSON.stringify(tree), 'EX', 60);
+            return industry.tree().then(tree => {
+                const json = JSON.stringify(tree);
+                redis.set(key, json, 'EX', 60 * 15);
                 return tree;
             });
         }).catch(err => {

@@ -35,6 +35,7 @@ const Schema = new mongoose.Schema({
     timestamps: {createdAt: 'created', updatedAt: 'modified'}
 });
 
+new Hooks(Schema);
 Schema.statics = statics;
 
 export default mongoose.model('storage', Schema);
