@@ -12,8 +12,24 @@ const Statics = {
             owner      : user,
             information: merchant.information
         })).save().then(doc => {
+            "use strict";
             return doc;
         }).catch(err => {
+            "use strict";
+            return bluebird.reject(err);
+        });
+    },
+
+    // 是否经过审核
+    checkAuditById(id) {
+        return this.findById(id).then(merchant => {
+            "use strict";
+            if (!merchant || !merchant.review) {
+                return false;
+            }
+            return merchant.review.status;
+        }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -25,6 +41,7 @@ const Statics = {
             owner  : user,
             deleted: null
         }, 'type review information').then(docs => {
+            "use strict";
             return docs.map(item => {
                 return {
                     type       : item.type,
@@ -33,6 +50,7 @@ const Statics = {
                 };
             });
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -48,11 +66,13 @@ const Statics = {
                 }
             }
         }).then(doc => {
+            "use strict";
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
             return doc;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -68,11 +88,13 @@ const Statics = {
                 }
             }
         }).then(doc => {
+            "use strict";
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
             return doc;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -89,11 +111,13 @@ const Statics = {
                 review: true
             }
         }).then(doc => {
+            "use strict";
             if (!doc) {
                 throw new Error('the data does not exist.');
             }
             return doc;
         }).catch(err => {
+            "use strict";
             return bluebird.reject(err);
         });
 

@@ -4,16 +4,38 @@
 import Service from '../index';
 // import User from '../../model/mysql/user';
 import Reward from '../../model/mongo/reward';
+import Merchant from '../../model/mongo/merchant';
 
-class TaskService extends Service {
+class RewardService extends Service {
     create = (ctx) => {
-        return (new Reward(ctx.request.body)).save().then(doc => {
-            this.response(Service.SUCCESS, {
-                _id: doc._id
+        return Promise.resolve().then(() => {
+            return ctx.request.body;
+        }).then(reward => {
+            return Merchant.checkAuditById(reward.merchant).then(audit => {
+                if (!audit) {
+                    throw new Error('merchants have not been reviewed.');
+                }
+                return reward;
             });
+        }).then(reward => {
+            return Reward.create(reward);
+        }).then(reward => {
+            if (reward._id) {
+                this.success();
+            } else {
+                this.failure('save failed.');
+            }
         }).catch(err => {
-            this.response(Service.FAILURE, err.message);
+            this.failure(err.message);
         });
+
+        // return (new Reward(ctx.request.body)).save().then(doc => {
+        //     this.response(Service.SUCCESS, {
+        //         _id: doc._id
+        //     });
+        // }).catch(err => {
+        //     this.response(Service.FAILURE, err.message);
+        // });
         // User.sync({force: true}).then(() => {
         //     // Table created
         //     return User.create({
@@ -34,4 +56,4 @@ class TaskService extends Service {
     }
 }
 
-export default new TaskService();
+export default new RewardService();
