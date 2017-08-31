@@ -8,7 +8,7 @@ const V1 = new Router('storage', {
         '/save': 'save'
     },
     get : {
-        '/view/:_id': 'view'
+        '/scan/:_id': 'scan'
     }
 });
 
