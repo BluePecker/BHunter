@@ -9,6 +9,8 @@ class ResponseCode {
 }
 
 class Service extends ResponseCode {
+    allowMethod = [];
+
     constructor() {
         super();
         // interceptor
@@ -21,7 +23,7 @@ class Service extends ResponseCode {
                     if (typeof args[0] == 'object' && Reflect.has(args[0], 'body')) {
                         Reflect.set(target, 'ctx', args[0]);
                         // for auth
-                        if (!Reflect.apply(target['auth'], target, [])) {
+                        if (!Reflect.apply(target['auth'], target, [name])) {
                             return this.failure('auth failed.');
                         }
                     }
@@ -37,9 +39,13 @@ class Service extends ResponseCode {
 
     /**
      * 权限验证
+     * @param name
      * @returns {boolean}
      */
-    auth() {
+    auth(name) {
+        if (this.allowMethod.indexOf(name) > -1) {
+            return true;
+        }
         const header = this.ctx.headers;
         this.ctx.user = {
             _id: mongoose.Types.ObjectId(header['json-web-token'])

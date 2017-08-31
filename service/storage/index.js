@@ -6,6 +6,16 @@ import Storage from '../../model/mongo/storage';
 
 class StorageService extends Service {
     /**
+     * view方法跳过权限验证
+     * @param name 调用方法名
+     * @returns {boolean}
+     */
+    auth(name) {
+        this.allowMethod = ['view'];
+        return super.auth(name);
+    }
+
+    /**
      * 对象存储
      * @param ctx
      * @returns {*|Promise|Promise.<array>}
@@ -28,14 +38,11 @@ class StorageService extends Service {
             });
     }
 
-    auth() {
-        const pass = '/storage/view/';
-        if (this.ctx.path.match(pass)) {
-            return true;
-        }
-        return super.auth();
-    }
-
+    /**
+     * 查看存储对象
+     * @param ctx
+     * @returns {Promise.<>|Promise}
+     */
     view(ctx) {
         return Storage.findById(ctx.params._id).then(object => {
             if (!object) {
