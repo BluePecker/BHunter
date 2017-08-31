@@ -23,6 +23,23 @@ const Statics = {
         });
     },
 
+    // 是否经过审核
+    checkAudit(id, user) {
+        return this.findOne({
+            _id  : id,
+            owner: user
+        }).then(industry => {
+            "use strict";
+            if (!industry || !industry.review) {
+                return false;
+            }
+            return industry.review.status;
+        }).catch(err => {
+            "use strict";
+            return bluebird.reject(err);
+        });
+    },
+
     // 编辑
     edit(id, industry, user) {
         return this.findByIdAndUpdate(id, {

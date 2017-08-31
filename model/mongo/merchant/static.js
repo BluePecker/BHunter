@@ -27,7 +27,6 @@ const Statics = {
             owner: user
         }).then(merchant => {
             "use strict";
-            console.log('debug: ', merchant);
             if (!merchant || !merchant.review) {
                 return false;
             }

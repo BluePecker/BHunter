@@ -5,6 +5,7 @@ import Service from '../index';
 // import User from '../../model/mysql/user';
 import Reward from '../../model/mongo/reward';
 import Merchant from '../../model/mongo/merchant';
+import Industry from '../../model/mongo/industry';
 
 class RewardService extends Service {
     create = (ctx) => {
@@ -13,7 +14,14 @@ class RewardService extends Service {
         }).then(reward => {
             return Merchant.checkAudit(reward.merchant, ctx.user).then(audit => {
                 if (!audit) {
-                    throw new Error('merchants have not been reviewed.');
+                    throw new Error('merchant have not been reviewed.');
+                }
+                return reward;
+            });
+        }).then(reward => {
+            return Industry.checkAudit(reward.industry, ctx.user).then(audit => {
+                if (!audit) {
+                    throw new Error('Industry have not been reviewed.');
                 }
                 return reward;
             });
@@ -29,13 +37,6 @@ class RewardService extends Service {
             this.failure(err.message);
         });
 
-        // return (new Reward(ctx.request.body)).save().then(doc => {
-        //     this.response(Service.SUCCESS, {
-        //         _id: doc._id
-        //     });
-        // }).catch(err => {
-        //     this.response(Service.FAILURE, err.message);
-        // });
         // User.sync({force: true}).then(() => {
         //     // Table created
         //     return User.create({
