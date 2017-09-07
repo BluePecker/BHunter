@@ -8,7 +8,6 @@ import Service from '../index';
 import Reward from '../../model/mongo/reward';
 import Merchant from '../../model/mongo/merchant';
 import Industry from '../../model/mongo/industry';
-import Storage from '../../model/mongo/storage';
 
 class RewardService extends Service {
     create = (ctx) => {

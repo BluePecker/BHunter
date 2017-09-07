@@ -9,6 +9,8 @@ import Path from 'path-exists';
 import BodyParser from 'koa-bodyparser';
 import Mount from 'koa-mount';
 import Router from '../router/router';
+import Boot from '../middleware/boot';
+
 
 /**
  * @class Bootstrap
@@ -31,21 +33,10 @@ class Bootstrap {
         // body parser
         this.app.use(BodyParser());
         // defined response header
-        this.app.use(async(ctx, next) => {
-            await next();
-            ctx.set('Charset', 'utf-8');
-            ctx.set('Content-Type', 'application/json');
-        });
+        this.app.use(Boot.header);
         // recorder request log and cost time
-        this.app.use(async(ctx, next) => {
-            const start = Date.now();
-            await next();
-            const ms = Date.now() - start;
-            // write request log
-            this.logger.info('%s %s %s - %sms', ctx.status, ctx.method, ctx.url, ms);
-            // x-response-time
-            ctx.set('X-Response-Time', `${ms}ms`);
-        });
+        this.app.use(Boot.logger);
+        this.app.use(Boot.authentication);
     }
 
     /**

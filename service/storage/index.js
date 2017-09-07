@@ -11,10 +11,10 @@ class StorageService extends Service {
      * @param name 调用方法名
      * @returns {boolean}
      */
-    auth(name) {
-        this.allowMethod = ['scan'];
-        return super.auth(name);
-    }
+    // auth(name) {
+    //     this.allowMethod = ['scan'];
+    //     return super.auth(name);
+    // }
 
     /**
      * 对象存储
