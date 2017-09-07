@@ -32,10 +32,10 @@ class Bootstrap {
         });
         // json body parser
         this.app.use(BodyParser());
-        // authentication
-        this.app.use(Boot.authentication);
         // // recorder request log
         this.app.use(Boot.logger);
+        // authentication
+        this.app.use(Boot.authentication);
         // // defined response header
         this.app.use(Boot.header);
     }
