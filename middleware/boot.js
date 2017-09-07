@@ -8,7 +8,7 @@ class Boot {
 
     static allowRoute() {
         return [
-            '/v1/storage/scan/*'
+            // '/v1/storage/scan/*'
         ];
     }
 
