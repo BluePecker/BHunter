@@ -35,7 +35,7 @@ class Bootstrap {
         // // recorder request log and cost time
         this.app.use(Boot.logger);
         // // defined response header
-        // this.app.use(Boot.header);
+        this.app.use(Boot.header);
         // this.app.use(Boot.authentication);
     }
 
