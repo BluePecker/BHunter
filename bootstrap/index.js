@@ -34,10 +34,10 @@ class Bootstrap {
         this.app.use(BodyParser());
         // // recorder request log
         this.app.use(Boot.logger);
-        // authentication
-        this.app.use(Boot.authentication);
         // // defined response header
         this.app.use(Boot.header);
+        // authentication
+        this.app.use(Boot.authentication);
     }
 
     /**
