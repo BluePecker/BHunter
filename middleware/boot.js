@@ -7,8 +7,8 @@ import mongoose from 'mongoose';
 class Boot {
 
     authentication = async(ctx, next) => {
-        if (!ctx.headers['json-web-token']) {
-            ctx.throw(403, 'auth failed.');
+        if (!ctx.headers['json-web-token'] && !ctx.allow) {
+            ctx.throw(403, 'authentication failed.');
         } else {
             ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
             await next();
