@@ -18,6 +18,7 @@ class Boot {
         });
 
         if (!ctx.headers['json-web-token'] && !allowed) {
+            ctx.status = 403;
             // ctx.throw(403, 'authentication failed.');
         } else {
             ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
