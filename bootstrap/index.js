@@ -36,7 +36,7 @@ class Bootstrap {
         this.app.use(Boot.logger);
         // // defined response header
         this.app.use(Boot.header);
-        // this.app.use(Boot.authentication);
+        this.app.use(Boot.authentication);
     }
 
     /**

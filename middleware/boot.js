@@ -10,7 +10,7 @@ class Boot {
         if (!ctx.headers['json-web-token']) {
             ctx.throw(403, 'auth failed.');
         } else {
-            ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
+            // ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
             next();
         }
     };
