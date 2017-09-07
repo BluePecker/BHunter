@@ -6,9 +6,19 @@ import mongoose from 'mongoose';
 
 class Boot {
 
+    static allowRoute() {
+        return [
+            '/v1/storage/scan/*'
+        ];
+    }
+
     authentication = async(ctx, next) => {
-        if (!ctx.headers['json-web-token'] && !ctx.allow) {
-            ctx.throw(403, 'authentication failed.');
+        const allowed = Boot.allowRoute().some(route => {
+            return ctx.url.match(new RegExp(route)) ? true : false;
+        });
+
+        if (!ctx.headers['json-web-token'] && !allowed) {
+            ctx.throw(404, 'authentication failed.');
         } else {
             ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
             await next();
