@@ -8,7 +8,7 @@ class Boot {
 
     static allowRoute() {
         return [
-            // '/v1/storage/scan/*'
+            '/v1/storage/scan/*'
         ];
     }
 
@@ -19,7 +19,6 @@ class Boot {
 
         if (!ctx.headers['json-web-token'] && !allowed) {
             ctx.status = 403;
-            // ctx.throw(403, 'authentication failed.');
         } else {
             ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
             await next();
