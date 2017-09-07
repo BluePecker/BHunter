@@ -1,7 +1,6 @@
 /**
  * Created by shuc on 17/8/8.
  */
-import mongoose from 'mongoose';
 
 class ResponseCode {
     static SUCCESS = 200;
@@ -9,7 +8,6 @@ class ResponseCode {
 }
 
 class Service extends ResponseCode {
-    allowMethod = [];
 
     constructor() {
         super();
@@ -22,10 +20,6 @@ class Service extends ResponseCode {
                 return (...args) => {
                     if (typeof args[0] == 'object' && Reflect.has(args[0], 'body')) {
                         Reflect.set(target, 'ctx', args[0]);
-                        // for auth
-                        // if (!Reflect.apply(target['auth'], target, [name])) {
-                        //     return this.failure('auth failed.');
-                        // }
                     }
                     return Reflect.apply(target[name], target, args);
                 };
@@ -36,22 +30,6 @@ class Service extends ResponseCode {
         };
         return new Proxy(this, interceptor);
     }
-
-    /**
-     * 权限验证
-     * @param name
-     * @returns {boolean}
-     */
-    // auth(name) {
-    //     if (this.allowMethod.indexOf(name) > -1) {
-    //         return true;
-    //     }
-    //     const header = this.ctx.headers;
-    //     this.ctx.user = {
-    //         _id: mongoose.Types.ObjectId(header['json-web-token'])
-    //     };
-    //     return header['json-web-token'] ? true : false;
-    // }
 
     /**
      * 应答

@@ -6,15 +6,6 @@ import Storage from '../../model/mongo/storage';
 import StorageCache from '../../model/redis/storage';
 
 class StorageService extends Service {
-    /**
-     * view方法跳过权限验证
-     * @param name 调用方法名
-     * @returns {boolean}
-     */
-    // auth(name) {
-    //     this.allowMethod = ['scan'];
-    //     return super.auth(name);
-    // }
 
     /**
      * 对象存储
@@ -23,20 +14,19 @@ class StorageService extends Service {
      */
     save(ctx) {
         const params = ctx.request.body;
-        return Storage.addBatch(params, ctx.user)
-            .then(objects => {
-                this.success(objects.map(item => {
-                    return {
-                        _id    : item._id,
-                        address: item.address || {
-                            route   : '',
-                            location: ''
-                        }
-                    };
-                }));
-            }).catch(err => {
-                this.failure(err.message);
-            });
+        return Storage.addBatch(params, ctx.user).then(objects => {
+            this.success(objects.map(item => {
+                return {
+                    _id    : item._id,
+                    address: item.address || {
+                        route   : '',
+                        location: ''
+                    }
+                };
+            }));
+        }).catch(err => {
+            this.failure(err.message);
+        });
     }
 
     /**

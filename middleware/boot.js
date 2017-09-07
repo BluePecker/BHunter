@@ -11,7 +11,8 @@ class Boot {
             ctx.throw(403, 'auth failed.');
         } else {
             ctx.user = {_id: mongoose.Types.ObjectId(ctx.header['json-web-token'])};
-            await next();
+            const test = await next();
+            Log4js.getLogger('koa').info(test);
         }
     };
 
