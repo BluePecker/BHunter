@@ -30,13 +30,13 @@ class Bootstrap {
         this.app.on('error', err => {
             this.logger.error(`ooh! some wrong happened: ${err}`);
         });
-        // recorder request log and cost time
-        this.app.use(Boot.logger);
         // json body parser
         this.app.use(BodyParser());
-        // defined response header
-        this.app.use(Boot.header);
-        this.app.use(Boot.authentication);
+        // // recorder request log and cost time
+        // this.app.use(Boot.logger);
+        // // defined response header
+        // this.app.use(Boot.header);
+        // this.app.use(Boot.authentication);
     }
 
     /**
