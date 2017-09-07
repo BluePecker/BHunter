@@ -33,7 +33,7 @@ class Bootstrap {
         // json body parser
         this.app.use(BodyParser());
         // // recorder request log and cost time
-        // this.app.use(Boot.logger);
+        this.app.use(Boot.logger);
         // // defined response header
         // this.app.use(Boot.header);
         // this.app.use(Boot.authentication);
