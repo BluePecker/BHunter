@@ -28,7 +28,7 @@ class Bootstrap {
         this.app = new Koa();
         // listen error
         this.app.on('error', err => {
-            this.logger.error(`ooh! some wrong happened: ${err}`);
+            this.logger.error(`Ooh! some wrong happened -> ${err}`);
         });
         // json body parser
         this.app.use(BodyParser());
