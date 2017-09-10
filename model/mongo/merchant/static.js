@@ -47,6 +47,7 @@ const Statics = {
             "use strict";
             return docs.map(item => {
                 return {
+                    _id        : item._id,
                     type       : item.type,
                     review     : item.review,
                     information: item.information
