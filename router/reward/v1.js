@@ -8,6 +8,7 @@ const V1 = new Router('reward', {
         '/create': 'create'
     },
     get  : {
+        '/list/:page' : 'list',
         '/detail/:_id': 'detail'
     },
     patch: {

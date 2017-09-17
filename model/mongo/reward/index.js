@@ -1,6 +1,7 @@
 /**
  * Created by shuc on 17/8/1.
  */
+import paginate from 'mongoose-paginate';
 import validator from 'node-mongoose-validator';
 import mongoose from '../index';
 import statics from './static';
@@ -124,6 +125,7 @@ const Schema = new mongoose.Schema({
     location: "2dsphere"
 });
 
+Schema.plugin(paginate);
 Schema.statics = statics;
 
 export default mongoose.model('reward', Schema);

@@ -18,10 +18,8 @@ const Statics = {
             industry: reward.industry,
             merchant: reward.merchant
         })).save().then(reward => {
-            "use strict";
             return reward;
         }).catch(err => {
-            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -32,13 +30,11 @@ const Statics = {
             _id    : id,
             deleted: null
         }).then(reward => {
-            "use strict";
             if (!reward) {
                 throw new Error('the data does not exist.');
             }
             return reward;
         }).catch(err => {
-            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -54,13 +50,11 @@ const Statics = {
                 }
             }
         }).then(reward => {
-            "use strict";
             if (!reward) {
                 throw new Error('the data does not exist.');
             }
             return reward;
         }).catch(err => {
-            "use strict";
             return bluebird.reject(err);
         });
     },
@@ -76,13 +70,43 @@ const Statics = {
                 }
             }
         }).then(reward => {
-            "use strict";
             if (!reward) {
                 throw new Error('the data does not exist.');
             }
             return reward;
         }).catch(err => {
-            "use strict";
+            return bluebird.reject(err);
+        });
+    },
+
+    // 查找附近悬赏单
+    findByGeo(geo, page, limit, sort) {
+        let query = {
+            'deleted'      : null,
+            'review.status': true,
+            'location'     : {
+                $near: {
+                    $geometry   : {
+                        type       : 'Point',
+                        coordinates: [
+                            geo.longitude,
+                            geo.latitude
+                        ]
+                    },
+                    $minDistance: geo.distance
+                }
+
+            }
+        };
+
+        return this.paginate(query, {
+            select: 'describe headline contact tactics detail annex deadline location creator industry merchant',
+            page  : page || 1,
+            sort  : sort || {},
+            limit : limit || 10
+        }).then(docs => {
+            return docs || [];
+        }).catch(err => {
             return bluebird.reject(err);
         });
     }

@@ -97,6 +97,18 @@ class RewardService extends Service {
         });
     };
 
+    list = (ctx) => {
+        return Promise.resolve().then(() => {
+            return ctx.request.body;
+        }).then(req => {
+            return Reward.findByGeo(req.geo || {}, ctx.params.page, 10, req.sort);
+        }).then(docs => {
+            this.success(docs);
+        }).catch(err => {
+            this.failure(err.message);
+        });
+    };
+
     adopt = (ctx) => {
         return Reward.adopt({
             _id: ctx.params._id
