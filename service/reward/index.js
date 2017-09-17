@@ -115,9 +115,9 @@ class RewardService extends Service {
                         },
                         $maxDistance: req.distance
                     }
-
                 }
             }, {
+                page  : ctx.params.page || 1,
                 sort  : req.sort || {},
                 select: 'describe headline contact tactics detail annex deadline location creator industry merchant'
             });
