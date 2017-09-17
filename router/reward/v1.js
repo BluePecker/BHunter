@@ -5,10 +5,10 @@ import Router from '../router';
 
 const V1 = new Router('reward', {
     post : {
-        '/create': 'create'
+        '/create'    : 'create',
+        '/list/:page': 'list'
     },
     get  : {
-        '/list/:page' : 'list',
         '/detail/:_id': 'detail'
     },
     patch: {
