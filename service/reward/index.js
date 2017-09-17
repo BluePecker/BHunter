@@ -101,7 +101,7 @@ class RewardService extends Service {
         return Promise.resolve().then(() => {
             return ctx.request.body;
         }).then(req => {
-            return Reward.paginate({
+            return Reward.find({
                 'deleted'      : null,
                 'review.status': true,
                 'location'     : {
@@ -117,12 +117,7 @@ class RewardService extends Service {
                     }
 
                 }
-            }, {
-                select: 'describe headline contact tactics detail annex deadline location creator industry merchant',
-                page  : ctx.params.page || 1,
-                sort  : req.sort || {},
-                limit : req.limit || 10
-            });
+            }, 'describe headline contact tactics detail annex deadline location creator industry merchant');
         }).then(paginate => {
             this.success(paginate);
         }).catch(err => {
