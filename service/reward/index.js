@@ -104,11 +104,7 @@ class RewardService extends Service {
             switch (req.sort) {
             case 'S001':
                 req.sort = {
-                    tactics: {
-                        reward: {
-                            univalent: -1
-                        }
-                    }
+                    'tactics.reward.univalent': -1
                 };
                 break;
             case 'S002':
