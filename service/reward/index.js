@@ -113,7 +113,7 @@ class RewardService extends Service {
                                 req.latitude
                             ]
                         },
-                        $minDistance: req.distance
+                        $maxDistance: req.distance
                     }
 
                 }
