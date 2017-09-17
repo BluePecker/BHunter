@@ -77,38 +77,6 @@ const Statics = {
         }).catch(err => {
             return bluebird.reject(err);
         });
-    },
-
-    // 查找附近悬赏单
-    findByGeo(geo, page, limit, sort) {
-        let query = {
-            'deleted'      : null,
-            'review.status': true,
-            'location'     : {
-                $near: {
-                    $geometry   : {
-                        type       : 'Point',
-                        coordinates: [
-                            geo.longitude,
-                            geo.latitude
-                        ]
-                    },
-                    $minDistance: geo.distance
-                }
-
-            }
-        };
-
-        return this.paginate(query, {
-            select: 'describe headline contact tactics detail annex deadline location creator industry merchant',
-            page  : page || 1,
-            sort  : sort || {},
-            limit : limit || 10
-        }).then(docs => {
-            return docs || [];
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
     }
 };
 

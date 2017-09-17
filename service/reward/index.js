@@ -101,9 +101,30 @@ class RewardService extends Service {
         return Promise.resolve().then(() => {
             return ctx.request.body;
         }).then(req => {
-            return Reward.findByGeo(req.geo || {}, ctx.params.page, 10, req.sort);
-        }).then(docs => {
-            this.success(docs);
+            return Reward.paginate({
+                'deleted'      : null,
+                'review.status': true,
+                'location'     : {
+                    $near: {
+                        $geometry   : {
+                            type       : 'Point',
+                            coordinates: [
+                                req.longitude,
+                                req.latitude
+                            ]
+                        },
+                        $minDistance: req.distance
+                    }
+
+                }
+            }, {
+                select: 'describe headline contact tactics detail annex deadline location creator industry merchant',
+                page  : ctx.params.page || 1,
+                sort  : req.sort || {},
+                limit : req.limit || 10
+            });
+        }).then(paginate => {
+            this.success(paginate);
         }).catch(err => {
             this.failure(err.message);
         });
