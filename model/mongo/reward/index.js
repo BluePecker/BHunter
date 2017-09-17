@@ -125,7 +125,7 @@ const Schema = new mongoose.Schema({
     location: "2dsphere"
 });
 
-Schema.plugin(paginate);
 Schema.statics = statics;
+Schema.plugin(paginate);
 
 export default mongoose.model('reward', Schema);
