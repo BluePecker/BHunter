@@ -101,6 +101,31 @@ class RewardService extends Service {
         return Promise.resolve().then(() => {
             return ctx.request.body;
         }).then(req => {
+            switch (req.sort) {
+            case 'S001':
+                req.sort = {
+                    tactics: {
+                        reward: {
+                            univalent: -1
+                        }
+                    }
+                };
+                break;
+            case 'S002':
+                req.sort = {
+                    created: -1
+                };
+                break;
+            case 'S003':
+                req.sort = {
+                    deadline: -1
+                };
+                break;
+            default:
+                req.sort = {};
+            }
+            return req;
+        }).then(req => {
             return Reward.paginate({
                 'deleted'      : null,
                 'review.status': true,
