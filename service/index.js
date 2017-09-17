@@ -44,7 +44,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : code,
-            data   : (Array.isArray(data) ? {list: data} : data) || {},
+            data   : (Array.isArray(data) ? {docs: data} : data) || {},
             message: message
         };
     }
@@ -61,7 +61,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : ResponseCode.SUCCESS,
-            data   : (Array.isArray(data) ? {list: data} : data) || {},
+            data   : (Array.isArray(data) ? {docs: data} : data) || {},
             message: message || 'winner winner,chicken dinner.'
         };
     }
@@ -78,7 +78,7 @@ class Service extends ResponseCode {
         }
         this.ctx.body = {
             code   : ResponseCode.FAILURE,
-            data   : (Array.isArray(data) ? {list: data} : data) || {},
+            data   : (Array.isArray(data) ? {docs: data} : data) || {},
             message: message
         };
     }
