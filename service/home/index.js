@@ -17,7 +17,7 @@ class HomeService extends Service {
                         'deleted'      : null,
                         '_id'          : id,
                         'review.status': true
-                    }, 'describe headline tactics views').then(doc => {
+                    }, 'describe headline tactics views favor_num').then(doc => {
                         return doc || {};
                     });
                 }),
