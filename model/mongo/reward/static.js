@@ -36,6 +36,7 @@ const Statics = {
             }
             // 浏览次数
             return this.update({$inc: {views: 1}}).then(() => {
+                reward.views++;
                 return reward;
             });
         }).catch(err => {
