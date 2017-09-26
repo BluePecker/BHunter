@@ -122,7 +122,7 @@ const Schema = new mongoose.Schema({
         type   : Boolean,
         default: false
     },
-    // 推荐头条
+    // 推荐头条 todo 将头条设置为某段时间内为头条
     new     : {
         type   : Boolean,
         default: false
