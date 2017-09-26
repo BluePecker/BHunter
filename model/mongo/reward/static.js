@@ -35,7 +35,7 @@ const Statics = {
                 throw new Error('the data does not exist.');
             }
             // 浏览次数
-            this.update({$inc: {}});
+            this.update({$inc: {views: 1}});
             return reward;
         }).catch(err => {
             return bluebird.reject(err);
