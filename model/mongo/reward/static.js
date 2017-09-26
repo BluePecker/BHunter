@@ -36,6 +36,7 @@ const Statics = {
                 views: 1
             }
         }).then(err => {
+            console.log(err);
             if (err) {
                 throw new Error(err.message);
             }
@@ -44,6 +45,7 @@ const Statics = {
                 'review.status': true,
                 'deleted'      : null
             }).then(reward => {
+                console.log(reward);
                 if (!reward) {
                     throw new Error('the data does not exist.');
                 }
