@@ -117,6 +117,11 @@ const Schema = new mongoose.Schema({
             required: true
         }
     },
+    // 浏览次数
+    views   : {
+        type   : Number,
+        default: 0
+    },
     // 新手任务
     guide   : {
         type   : Boolean,
