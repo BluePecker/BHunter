@@ -21,8 +21,9 @@ class HomeService extends Service {
             ]);
         }).then(values => {
             return this.success({
-                new  : values[0],
-                guide: values[1]
+                overview: values[0],
+                new     : values[1],
+                guide   : values[2]
             });
         }).catch(err => {
             return this.failure(err.message);
