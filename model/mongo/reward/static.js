@@ -100,6 +100,14 @@ const Statics = {
         }).catch(err => {
             return bluebird.reject(err);
         });
+    },
+
+    overviewById(id) {
+        return this.findById(id).then(doc => {
+            return doc || {};
+        }).catch(err => {
+            return bluebird.reject(err);
+        });
     }
 };
 

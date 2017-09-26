@@ -117,7 +117,7 @@ const Schema = new mongoose.Schema({
             required: true
         }
     },
-    // 是否是新手任务
+    // 新手任务
     guide   : {
         type   : Boolean,
         default: false
