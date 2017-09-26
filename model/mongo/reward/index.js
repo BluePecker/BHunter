@@ -8,22 +8,22 @@ import statics from './static';
 
 const Schema = new mongoose.Schema({
     // 描述
-    describe: {
+    describe : {
         type    : String,
         required: true
     },
     // 标题
-    headline: {
+    headline : {
         type    : String,
         required: true
     },
     // 联系方式
-    contact : {
+    contact  : {
         type    : String,
         required: true
     },
     // 审核
-    review  : {
+    review   : {
         // 审核人
         user     : {
             _id: mongoose.Schema.Types.ObjectId
@@ -34,7 +34,7 @@ const Schema = new mongoose.Schema({
         timestamp: Date
     },
     // 策略
-    tactics : {
+    tactics  : {
         // 领赏方案
         case     : {
             type    : String,
@@ -60,25 +60,25 @@ const Schema = new mongoose.Schema({
         }
     },
     // 详情
-    detail  : String,
+    detail   : String,
     // 附件
-    annex   : [{
+    annex    : [{
         // 描述
         describe: String,
         // 文件id
         _id     : mongoose.Schema.Types.ObjectId
     }],
     // 删除时间
-    deleted : {
+    deleted  : {
         type   : Date,
         default: null
     },
     // 截止日期
-    deadline: {
+    deadline : {
         type: Date
     },
     // 位置
-    location: {
+    location : {
         // 类型
         type       : {
             type   : String,
@@ -91,44 +91,49 @@ const Schema = new mongoose.Schema({
         }
     },
     // 发布者
-    creator : {
+    creator  : {
         _id: {
             type    : mongoose.Schema.Types.ObjectId,
             required: true
         }
     },
     // 编辑者
-    editor  : {
+    editor   : {
         _id: {
             type: mongoose.Schema.Types.ObjectId
         }
     },
     // 行业
-    industry: {
+    industry : {
         _id: {
             type    : mongoose.Schema.Types.ObjectId,
             required: true
         }
     },
     // 商户
-    merchant: {
+    merchant : {
         _id: {
             type    : mongoose.Schema.Types.ObjectId,
             required: true
         }
     },
     // 浏览次数
-    views   : {
+    views    : {
+        type   : Number,
+        default: 0
+    },
+    // 收藏次数
+    favor_num: {
         type   : Number,
         default: 0
     },
     // 新手任务
-    guide   : {
+    guide    : {
         type   : Boolean,
         default: false
     },
     // 推荐头条 todo 将头条设置为某段时间内为头条
-    new     : {
+    new      : {
         type   : Boolean,
         default: false
     }
