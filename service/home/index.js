@@ -25,14 +25,14 @@ class HomeService extends Service {
                     'deleted'      : null,
                     'new'          : true,
                     'review.status': true
-                }).skip(0).limit(8).lean().then(docs => {
+                }, 'describe headline tactics').skip(0).limit(8).lean().then(docs => {
                     return docs || [];
                 }),
                 Reward.find({
                     'deleted'      : null,
                     'guide'        : true,
                     'review.status': true
-                }).skip(0).limit(2).lean().then(docs => {
+                }, 'describe headline tactics').skip(0).limit(2).lean().then(docs => {
                     return docs || [];
                 })
             ]);
