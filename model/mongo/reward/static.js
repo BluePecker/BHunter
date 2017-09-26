@@ -78,36 +78,6 @@ const Statics = {
         }).catch(err => {
             return bluebird.reject(err);
         });
-    },
-
-    // 新手任务
-    guide(skip, limit) {
-        return this.find({
-            guide: true
-        }).skip(skip || 0).limit(limit || 2).lean().then(docs => {
-            return docs || [];
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
-    // 头条情报
-    new(skip, limit) {
-        return this.find({
-            new: true
-        }).skip(skip || 0).limit(limit || 8).lean().then(docs => {
-            return docs || [];
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
-    },
-
-    overviewById(id) {
-        return this.findById(id).then(doc => {
-            return doc || {};
-        }).catch(err => {
-            return bluebird.reject(err);
-        });
     }
 };
 

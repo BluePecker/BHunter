@@ -1,6 +1,7 @@
 /**
  * Created by shuc on 17/9/26.
  */
+import Promise from 'bluebird';
 import Service from '../index';
 import Reward from '../../model/mongo/reward';
 
@@ -12,12 +13,28 @@ class HomeService extends Service {
                     return '59a7cefef8a8e949d4c962ff';
                 }).then(id => {
                     // todo 从mysql查出已领人数与完成人数
-                    return Reward.findById(id).then(doc => {
+                    return Reward.findOne({
+                        'deleted'      : null,
+                        '_id'          : id,
+                        'review.status': true
+                    }, 'describe headline tactics').then(doc => {
                         return doc || {};
                     });
                 }),
-                Reward.new(),
-                Reward.guide()
+                Reward.find({
+                    'deleted'      : null,
+                    'new'          : true,
+                    'review.status': true
+                }).skip(0).limit(8).lean().then(docs => {
+                    return docs || [];
+                }),
+                Reward.find({
+                    'deleted'      : null,
+                    'guide'        : true,
+                    'review.status': true
+                }).skip(0).limit(2).lean().then(docs => {
+                    return docs || [];
+                })
             ]);
         }).then(values => {
             return this.success({
