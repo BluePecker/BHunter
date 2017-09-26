@@ -116,6 +116,16 @@ const Schema = new mongoose.Schema({
             type    : mongoose.Schema.Types.ObjectId,
             required: true
         }
+    },
+    // 是否是新手任务
+    guide   : {
+        type   : Boolean,
+        default: false
+    },
+    // 推荐头条
+    new     : {
+        type   : Boolean,
+        default: false
     }
 }, {
     versionKey: false,
