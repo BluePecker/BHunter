@@ -35,17 +35,12 @@ const Statics = {
             $inc: {
                 views: 1
             }
-        }).then(err => {
-            console.log(err);
-            if (err) {
-                throw new Error(err.message);
-            }
+        }).then(() => {
             return this.findOne({
                 '_id'          : id,
                 'review.status': true,
                 'deleted'      : null
             }).then(reward => {
-                console.log(reward);
                 if (!reward) {
                     throw new Error('the data does not exist.');
                 }
