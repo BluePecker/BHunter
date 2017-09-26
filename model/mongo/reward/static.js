@@ -27,16 +27,26 @@ const Statics = {
 
     // 详情
     detail(id){
-        return this.findOne({
-            _id    : id,
-            deleted: null
-        }).then(reward => {
-            if (!reward) {
-                throw new Error('the data does not exist.');
+        return this.update({
+            '_id'          : id,
+            'review.status': true,
+            'deleted'      : null
+        }, {
+            $inc: {
+                views: 1
             }
-            // 浏览次数
-            return this.update({$inc: {views: 1}}).then(() => {
-                reward.views++;
+        }).then(err => {
+            if (err) {
+                throw new Error(err.message);
+            }
+            return this.findOne({
+                '_id'          : id,
+                'review.status': true,
+                'deleted'      : null
+            }).then(reward => {
+                if (!reward) {
+                    throw new Error('the data does not exist.');
+                }
                 return reward;
             });
         }).catch(err => {
